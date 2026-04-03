@@ -15,39 +15,39 @@
 
         body {
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
-            background: #f5f5f5;
+            background: #f0f2f5;
             min-height: 100vh;
         }
 
         /* Navbar */
         .navbar {
             background: #ffffff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 0 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            padding: 0 20px;
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .nav-container {
-            max-width: 1600px;
+            max-width: 100%;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
+            padding: 10px 0;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
         }
 
         .logo h1 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             color: #2c3e50;
         }
 
         .logo p {
-            font-size: 11px;
+            font-size: 10px;
             color: #7f8c8d;
             margin-top: 2px;
         }
@@ -66,7 +66,7 @@
             background: transparent;
             cursor: pointer;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             border-radius: 6px;
             transition: all 0.2s;
             color: #7f8c8d;
@@ -81,9 +81,9 @@
 
         /* Main Container */
         .main-container {
-            max-width: 1600px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
 
         /* Cards */
@@ -91,8 +91,8 @@
             background: #ffffff;
             border-radius: 8px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
             border: 1px solid #e0e0e0;
         }
 
@@ -101,35 +101,93 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
             border-bottom: 1px solid #e0e0e0;
         }
 
         .card-header h2 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             color: #2c3e50;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* Dashboard Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .stat-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+
+        .stat-card.active { border-left: 4px solid #27ae60; }
+        .stat-card.expired { border-left: 4px solid #e74c3c; }
+        .stat-card.renewal { border-left: 4px solid #f39c12; }
+        .stat-card.sku { border-left: 4px solid #3498db; }
+
+        /* Low Stock Table */
+        .low-stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .low-stock-table th {
+            background: #f8f9fa;
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .low-stock-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .warning {
+            color: #e74c3c;
+            font-weight: bold;
         }
 
         /* Search Bar */
         .search-wrapper {
             display: flex;
             gap: 8px;
-            flex: 1;
-            max-width: 450px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
         }
 
         .search-wrapper input {
             flex: 1;
-            padding: 8px 14px;
+            padding: 8px 12px;
             border: 1px solid #bdc3c7;
-            border-radius: 6px;
-            font-size: 13px;
+            border-radius: 4px;
+            font-size: 12px;
             background: #ffffff;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+            min-width: 150px;
         }
 
         .search-wrapper input:focus {
@@ -138,15 +196,15 @@
         }
 
         .btn-search, .btn-reset, .btn-add {
-            padding: 8px 18px;
+            padding: 8px 16px;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: 500;
-            font-size: 13px;
+            font-size: 12px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             transition: all 0.2s;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
@@ -172,26 +230,28 @@
         .table-wrapper {
             overflow-x: auto;
             border: 1px solid #e0e0e0;
-            border-radius: 6px;
+            border-radius: 4px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 12px;
+            font-size: 11px;
+            min-width: 1200px;
         }
 
         th {
             background: #f8f9fa;
             color: #2c3e50;
-            padding: 10px 8px;
+            padding: 8px 6px;
             font-weight: 600;
             border-bottom: 2px solid #e0e0e0;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+            white-space: nowrap;
         }
 
         td {
-            padding: 8px;
+            padding: 6px;
             border-bottom: 1px solid #ecf0f1;
             vertical-align: middle;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
@@ -205,9 +265,9 @@
         .badge-approved {
             background: #d5f5e3;
             color: #1e8449;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             display: inline-block;
         }
@@ -215,9 +275,9 @@
         .badge-active {
             background: #d5f5e3;
             color: #1e8449;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             display: inline-block;
         }
@@ -225,11 +285,20 @@
         .badge-expired {
             background: #fadbd8;
             color: #c0392b;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             display: inline-block;
+        }
+
+        .badge-renewal-sent {
+            background: #fef9e7;
+            color: #f39c12;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
         }
 
         /* Icons */
@@ -237,8 +306,8 @@
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 14px;
-            padding: 5px 8px;
+            font-size: 12px;
+            padding: 4px 6px;
             border-radius: 4px;
             transition: all 0.2s;
         }
@@ -250,36 +319,36 @@
         .copy-icon { color: #3498db; }
         .edit-icon { color: #f39c12; }
         .note-icon { color: #27ae60; }
-        .delete-icon { color: #e74c3c; }
 
         select, input[type="text"], input[type="date"], input[type="number"] {
             width: 100%;
-            padding: 6px 8px;
+            padding: 4px 6px;
             border: 1px solid #bdc3c7;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 10px;
             background: white;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         /* Pagination */
         .pagination {
-            margin-top: 20px;
+            margin-top: 15px;
             display: flex;
             justify-content: center;
-            gap: 5px;
+            gap: 4px;
             flex-wrap: wrap;
         }
 
         .pagination button {
-            padding: 6px 12px;
+            padding: 5px 10px;
             background: #ecf0f1;
             border: 1px solid #bdc3c7;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
             transition: all 0.2s;
+            min-width: 32px;
         }
 
         .pagination button.active {
@@ -295,65 +364,68 @@
         /* Upload Grid */
         .upload-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
         }
 
         .upload-card {
             background: #f9f9f9;
             border-radius: 8px;
-            padding: 18px;
+            padding: 15px;
             border: 1px solid #e0e0e0;
         }
 
         .upload-card h3 {
-            font-size: 15px;
-            margin-bottom: 8px;
+            font-size: 14px;
+            margin-bottom: 6px;
             color: #2c3e50;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .upload-card p {
             color: #7f8c8d;
-            font-size: 11px;
-            margin-bottom: 12px;
+            font-size: 10px;
+            margin-bottom: 10px;
         }
 
         .upload-card input {
             width: 100%;
-            padding: 8px;
+            padding: 6px;
             border: 1px solid #bdc3c7;
             border-radius: 4px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             background: white;
+            font-size: 11px;
         }
 
         .btn-upload {
             background: #2c3e50;
             color: white;
-            padding: 8px;
+            padding: 6px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             width: 100%;
             font-weight: 500;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+            font-size: 12px;
         }
 
         .btn-template {
             background: #ecf0f1;
             color: #2c3e50;
-            padding: 8px;
+            padding: 6px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-top: 8px;
+            margin-top: 6px;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+            font-size: 12px;
         }
 
         /* Modal */
@@ -372,10 +444,10 @@
 
         .modal-content {
             background: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 8px;
             width: 90%;
-            max-width: 550px;
+            max-width: 500px;
             max-height: 85%;
             overflow-y: auto;
         }
@@ -384,64 +456,64 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
-            padding-bottom: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
             border-bottom: 1px solid #e0e0e0;
         }
 
         .modal-header h3 {
-            font-size: 18px;
+            font-size: 16px;
             color: #2c3e50;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .close {
-            font-size: 24px;
+            font-size: 22px;
             cursor: pointer;
             color: #7f8c8d;
         }
 
         .form-group {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             color: #2c3e50;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .form-group input, .form-group select {
             width: 100%;
-            padding: 8px 10px;
+            padding: 6px 8px;
             border: 1px solid #bdc3c7;
             border-radius: 4px;
-            font-size: 13px;
+            font-size: 12px;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .btn-save {
             background: #27ae60;
             color: white;
-            padding: 10px;
+            padding: 8px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             width: 100%;
             font-weight: 600;
-            margin-top: 10px;
-            font-size: 14px;
+            margin-top: 8px;
+            font-size: 13px;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .message {
-            padding: 10px;
+            padding: 8px;
             border-radius: 4px;
-            margin-bottom: 12px;
-            font-size: 12px;
+            margin-bottom: 10px;
+            font-size: 11px;
         }
 
         .message.success { background: #d5f5e3; color: #1e8449; border-left: 3px solid #27ae60; }
@@ -455,17 +527,12 @@
             display: block;
         }
 
-        /* No horizontal scrollbar for body */
-        body {
-            overflow-x: auto;
-        }
-
         @media (max-width: 768px) {
-            .main-container { padding: 10px; }
-            .nav-container { flex-direction: column; }
+            .main-container { padding: 8px; }
+            .nav-container { flex-direction: column; text-align: center; }
             .card-header { flex-direction: column; }
-            .search-wrapper { max-width: 100%; }
-            th, td { font-size: 10px; padding: 4px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            th, td { font-size: 9px; padding: 3px; }
         }
     </style>
 </head>
@@ -478,29 +545,74 @@
                 <p>Manage your deals efficiently</p>
             </div>
             <div class="nav-links">
-                <button class="nav-link active" onclick="changePage('portal')"><i class="fas fa-table"></i> Deal Portal</button>
+                <button class="nav-link active" onclick="changePage('dashboard')"><i class="fas fa-tachometer-alt"></i> Dashboard</button>
+                <button class="nav-link" onclick="changePage('portal')"><i class="fas fa-table"></i> Deal Portal</button>
                 <button class="nav-link" onclick="changePage('upload')"><i class="fas fa-upload"></i> Upload Files</button>
             </div>
         </div>
     </div>
 
     <div class="main-container">
+        <!-- Dashboard Page -->
+        <div id="dashboardPage" class="page active">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card sku">
+                    <h3 id="totalSKU">0</h3>
+                    <p>Total SKUs</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="totalDeals">0</h3>
+                    <p>Total Deal Regs</p>
+                </div>
+                <div class="stat-card active">
+                    <h3 id="activeDeals">0</h3>
+                    <p>Active Deals</p>
+                </div>
+                <div class="stat-card expired">
+                    <h3 id="expiredDeals">0</h3>
+                    <p>Expired Deals</p>
+                </div>
+                <div class="stat-card renewal">
+                    <h3 id="renewalSent">0</h3>
+                    <p>Renewal Sent</p>
+                </div>
+            </div>
+
+            <!-- Low Stock Alert -->
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Low Stock Alert (Below 7 Units)</h2>
+                </div>
+                <div class="table-wrapper">
+                    <table class="low-stock-table">
+                        <thead>
+                            <tr><th>SKU</th><th>IG Stock</th><th>SS Stock</th><th>DS Stock</th><th>Status</th></tr>
+                        </thead>
+                        <tbody id="lowStockBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <!-- Deal Portal Page -->
-        <div id="portalPage" class="page active">
+        <div id="portalPage" class="page">
             <div class="card">
                 <div class="card-header">
                     <h2><i class="fas fa-list"></i> Deal Registrations</h2>
-                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                        <div class="search-wrapper">
-                            <input type="text" id="searchInput" placeholder="Search by Reference, Deal Reg, ASIN...">
-                            <button class="btn-search" onclick="searchDeals()"><i class="fas fa-search"></i> Search</button>
-                            <button class="btn-reset" onclick="resetSearch()"><i class="fas fa-undo"></i> Reset</button>
-                        </div>
-                        <button class="btn-add" onclick="openAddDealModal()"><i class="fas fa-plus-circle"></i> Add New Deal</button>
-                    </div>
+                    <button class="btn-add" onclick="openAddDealModal()"><i class="fas fa-plus-circle"></i> Add New Deal</button>
+                </div>
+                <div class="search-wrapper">
+                    <input type="text" id="searchSKU" placeholder="Search by SKU...">
+                    <input type="text" id="searchASIN" placeholder="Search by ASIN...">
+                    <input type="text" id="searchDealReg" placeholder="Search by Deal Reg...">
+                    <input type="text" id="searchReference" placeholder="Search by Reference...">
+                    <input type="text" id="searchNewRef" placeholder="Search by New Reference...">
+                    <button class="btn-search" onclick="searchDeals()"><i class="fas fa-search"></i> Search</button>
+                    <button class="btn-reset" onclick="resetSearch()"><i class="fas fa-undo"></i> Reset</button>
                 </div>
                 <div class="table-wrapper">
-                    <table>
+                    <table id="dealTable">
                         <thead>
                             <tr><th>SKU</th><th>IG</th><th>SS</th><th>DS</th><th>COG</th><th>ASIN</th>
                             <th>Status</th><th>Deal Reg</th><th>Active/Exp</th><th>Expiry</th>
@@ -549,7 +661,7 @@
         </div>
     </div>
 
-    <!-- Edit Deal Modal (Only for edit) -->
+    <!-- Edit Deal Modal -->
     <div id="editModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h3><i class="fas fa-edit"></i> Edit Deal</h3><span class="close" onclick="closeModal('editModal')">&times;</span></div>
@@ -568,45 +680,92 @@
     </div>
 
     <script>
-        // Storage key for localStorage
         const STORAGE_KEY = 'eaton_deals';
-        
         let currentPage = 1;
         let allDeals = [];
         let filteredDeals = [];
         let currentEditId = null;
 
-        // Load data from localStorage
         function loadData() {
             const stored = localStorage.getItem(STORAGE_KEY);
             if (stored) {
                 allDeals = JSON.parse(stored);
             } else {
-                // Sample data
                 allDeals = [
-                    { _id: '1', sku: 'SKU001', IG_Stock: '100', SS_Stock: '50', DS_Stock: '75', COG: '25.50', Asin: 'B01MXXXXX', Deal_Reg: 'DR001', expiry: '2025-12-31', Reference: 'REF001', New_Reference: 'NREF001', Renewal: 'Renewal Sent', Note: 'Test note', Rating: '4.5', BB: '89%', Review: '120' },
-                    { _id: '2', sku: 'SKU002', IG_Stock: '200', SS_Stock: '150', DS_Stock: '100', COG: '32.00', Asin: 'B02NXXXXX', Deal_Reg: 'DR002', expiry: '2024-01-15', Reference: 'REF002', New_Reference: '', Renewal: 'Renewal Pending', Note: '', Rating: '3.8', BB: '75%', Review: '45' },
-                    { _id: '3', sku: 'SKU003', IG_Stock: '75', SS_Stock: '30', DS_Stock: '45', COG: '18.75', Asin: 'B03PXXXXX', Deal_Reg: 'DR003', expiry: '2025-06-30', Reference: 'REF003', New_Reference: 'NREF003', Renewal: '', Note: 'Priority deal', Rating: '4.2', BB: '92%', Review: '89' }
+                    { _id: '1', sku: 'SKU001', IG_Stock: '100', SS_Stock: '50', DS_Stock: '75', COG: '25.50', Asin: 'B01M12345', Deal_Reg: 'DR001', expiry: '2025-12-31', Reference: 'REF001', New_Reference: 'NREF001', Renewal: 'Renewal Sent', Note: 'Test note', Rating: '4.5', BB: '89%', Review: '120' },
+                    { _id: '2', sku: 'SKU002', IG_Stock: '200', SS_Stock: '150', DS_Stock: '100', COG: '32.00', Asin: 'B02N67890', Deal_Reg: 'DR002', expiry: '2024-01-15', Reference: 'REF002', New_Reference: '', Renewal: 'Renewal Pending', Note: '', Rating: '3.8', BB: '75%', Review: '45' },
+                    { _id: '3', sku: 'SKU003', IG_Stock: '5', SS_Stock: '3', DS_Stock: '2', COG: '18.75', Asin: 'B03P11111', Deal_Reg: 'DR003', expiry: '2025-06-30', Reference: 'REF003', New_Reference: 'NREF003', Renewal: '', Note: 'Priority deal', Rating: '4.2', BB: '92%', Review: '89' },
+                    { _id: '4', sku: 'SKU004', IG_Stock: '50', SS_Stock: '25', DS_Stock: '30', COG: '42.00', Asin: 'B04Q22222', Deal_Reg: 'DR004', expiry: '2025-03-20', Reference: 'REF004', New_Reference: '', Renewal: 'Renewal Sent', Note: '', Rating: '4.0', BB: '85%', Review: '67' },
+                    { _id: '5', sku: 'SKU005', IG_Stock: '300', SS_Stock: '200', DS_Stock: '150', COG: '15.50', Asin: 'B05R33333', Deal_Reg: 'DR005', expiry: '2024-12-10', Reference: 'REF005', New_Reference: 'NREF005', Renewal: 'Renewal Pending', Note: 'High volume', Rating: '4.8', BB: '95%', Review: '234' },
+                    { _id: '6', sku: 'SKU006', IG_Stock: '6', SS_Stock: '4', DS_Stock: '1', COG: '22.00', Asin: 'B06S44444', Deal_Reg: 'DR006', expiry: '2025-01-20', Reference: 'REF006', New_Reference: '', Renewal: '', Note: 'Low stock', Rating: '3.5', BB: '70%', Review: '30' }
                 ];
                 saveData();
             }
             filteredDeals = [...allDeals];
             renderTable();
+            updateDashboard();
         }
 
-        // Save data to localStorage
         function saveData() {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(allDeals));
+            updateDashboard();
         }
 
-        // Generate unique ID
         function generateId() {
             return Date.now().toString() + Math.random().toString(36).substr(2, 6);
         }
 
+        function updateDashboard() {
+            // Total SKUs
+            document.getElementById('totalSKU').innerText = allDeals.length;
+            
+            // Total Deal Regs
+            document.getElementById('totalDeals').innerText = allDeals.filter(d => d.Deal_Reg).length;
+            
+            // Active vs Expired
+            const today = new Date();
+            let active = 0, expired = 0;
+            allDeals.forEach(deal => {
+                const expiryDate = deal.expiry ? new Date(deal.expiry) : null;
+                if (expiryDate && expiryDate < today) {
+                    expired++;
+                } else {
+                    active++;
+                }
+            });
+            document.getElementById('activeDeals').innerText = active;
+            document.getElementById('expiredDeals').innerText = expired;
+            
+            // Renewal Sent
+            const renewalSent = allDeals.filter(d => d.Renewal === 'Renewal Sent').length;
+            document.getElementById('renewalSent').innerText = renewalSent;
+            
+            // Low Stock Table (below 7)
+            const lowStock = allDeals.filter(d => 
+                parseInt(d.IG_Stock) < 7 || parseInt(d.SS_Stock) < 7 || parseInt(d.DS_Stock) < 7
+            );
+            const lowStockBody = document.getElementById('lowStockBody');
+            lowStockBody.innerHTML = '';
+            if (lowStock.length === 0) {
+                lowStockBody.innerHTML = '<tr><td colspan="5" style="text-align:center">No low stock items</td></tr>';
+            } else {
+                lowStock.forEach(deal => {
+                    const row = lowStockBody.insertRow();
+                    row.innerHTML = `
+                        <td>${escapeHtml(deal.sku)}</td>
+                        <td class="${parseInt(deal.IG_Stock) < 7 ? 'warning' : ''}">${escapeHtml(deal.IG_Stock || '0')}</td>
+                        <td class="${parseInt(deal.SS_Stock) < 7 ? 'warning' : ''}">${escapeHtml(deal.SS_Stock || '0')}</td>
+                        <td class="${parseInt(deal.DS_Stock) < 7 ? 'warning' : ''}">${escapeHtml(deal.DS_Stock || '0')}</td>
+                        <td>${parseInt(deal.IG_Stock) < 7 || parseInt(deal.SS_Stock) < 7 || parseInt(deal.DS_Stock) < 7 ? '⚠️ Low Stock' : 'OK'}</td>
+                    `;
+                });
+            }
+        }
+
         function renderTable() {
             const start = (currentPage - 1) * 20;
-            const pageDeals = filteredDeals.slice(start, start + 20);
+            const end = start + 20;
+            const pageDeals = filteredDeals.slice(start, end);
             const tbody = document.getElementById('dealTableBody');
             tbody.innerHTML = '';
             
@@ -646,6 +805,29 @@
             renderPagination();
         }
 
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredDeals.length / 20);
+            const container = document.getElementById('pagination');
+            container.innerHTML = '';
+            
+            if (totalPages <= 1) return;
+            
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.innerText = i;
+                btn.onclick = (function(page) {
+                    return function() { 
+                        currentPage = page; 
+                        renderTable(); 
+                    };
+                })(i);
+                if (i === currentPage) {
+                    btn.classList.add('active');
+                }
+                container.appendChild(btn);
+            }
+        }
+
         function updateExpiry(id, value) {
             const dealIndex = allDeals.findIndex(d => d._id === id);
             if (dealIndex !== -1) {
@@ -663,6 +845,7 @@
                 allDeals[dealIndex].Renewal = value;
                 saveData();
                 filteredDeals = [...allDeals];
+                renderTable();
                 showMessage('Renewal status updated', 'success');
             }
         }
@@ -788,36 +971,34 @@
         }
 
         function searchDeals() {
-            const term = document.getElementById('searchInput').value.toLowerCase();
-            filteredDeals = allDeals.filter(d => 
-                (d.Reference && d.Reference.toLowerCase().includes(term)) ||
-                (d.New_Reference && d.New_Reference.toLowerCase().includes(term)) ||
-                (d.Deal_Reg && d.Deal_Reg.toLowerCase().includes(term)) ||
-                (d.Asin && d.Asin.toLowerCase().includes(term))
-            );
+            const sku = document.getElementById('searchSKU').value.toLowerCase();
+            const asin = document.getElementById('searchASIN').value.toLowerCase();
+            const dealReg = document.getElementById('searchDealReg').value.toLowerCase();
+            const reference = document.getElementById('searchReference').value.toLowerCase();
+            const newRef = document.getElementById('searchNewRef').value.toLowerCase();
+            
+            filteredDeals = allDeals.filter(d => {
+                let match = true;
+                if (sku && !d.sku.toLowerCase().includes(sku)) match = false;
+                if (asin && !d.Asin.toLowerCase().includes(asin)) match = false;
+                if (dealReg && !d.Deal_Reg.toLowerCase().includes(dealReg)) match = false;
+                if (reference && !d.Reference.toLowerCase().includes(reference)) match = false;
+                if (newRef && !d.New_Reference.toLowerCase().includes(newRef)) match = false;
+                return match;
+            });
             currentPage = 1; 
             renderTable();
         }
 
         function resetSearch() { 
-            document.getElementById('searchInput').value = ''; 
+            document.getElementById('searchSKU').value = '';
+            document.getElementById('searchASIN').value = '';
+            document.getElementById('searchDealReg').value = '';
+            document.getElementById('searchReference').value = '';
+            document.getElementById('searchNewRef').value = '';
             filteredDeals = [...allDeals]; 
             currentPage = 1; 
             renderTable(); 
-        }
-
-        function renderPagination() {
-            const totalPages = Math.ceil(filteredDeals.length / 20);
-            const container = document.getElementById('pagination');
-            container.innerHTML = '';
-            if (totalPages <= 1) return;
-            for (let i = 1; i <= totalPages; i++) {
-                const btn = document.createElement('button');
-                btn.innerText = i;
-                btn.onclick = () => { currentPage = i; renderTable(); };
-                if (i === currentPage) btn.classList.add('active');
-                container.appendChild(btn);
-            }
         }
 
         // File Uploads
@@ -941,8 +1122,13 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(page + 'Page').classList.add('active');
             document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
-            if (page === 'portal') document.querySelectorAll('.nav-link')[0].classList.add('active');
-            else document.querySelectorAll('.nav-link')[1].classList.add('active');
+            if (page === 'dashboard') document.querySelectorAll('.nav-link')[0].classList.add('active');
+            else if (page === 'portal') document.querySelectorAll('.nav-link')[1].classList.add('active');
+            else document.querySelectorAll('.nav-link')[2].classList.add('active');
+            
+            if (page === 'dashboard') {
+                updateDashboard();
+            }
         }
 
         function showMessage(msg, type) {
