@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Eaton Deal Registration Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f0f2f5;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+            background: #f5f5f5;
             min-height: 100vh;
         }
 
         /* Navbar */
         .navbar {
             background: #ffffff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             padding: 0 30px;
             position: sticky;
             top: 0;
@@ -31,7 +35,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 0;
+            padding: 12px 0;
             flex-wrap: wrap;
             gap: 15px;
         }
@@ -39,55 +43,57 @@
         .logo h1 {
             font-size: 22px;
             font-weight: 700;
-            color: #1a1a2e;
+            color: #2c3e50;
         }
 
         .logo p {
             font-size: 11px;
-            color: #6c757d;
+            color: #7f8c8d;
             margin-top: 2px;
         }
 
         .nav-links {
             display: flex;
-            gap: 8px;
-            background: #f0f2f5;
-            padding: 5px;
-            border-radius: 50px;
+            gap: 5px;
+            background: #ecf0f1;
+            padding: 4px;
+            border-radius: 8px;
         }
 
         .nav-link {
-            padding: 10px 28px;
+            padding: 8px 24px;
             border: none;
             background: transparent;
             cursor: pointer;
             font-weight: 600;
             font-size: 14px;
-            border-radius: 50px;
-            transition: all 0.3s;
-            color: #4a5568;
+            border-radius: 6px;
+            transition: all 0.2s;
+            color: #7f8c8d;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .nav-link.active {
             background: #ffffff;
-            color: #1a1a2e;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            color: #2c3e50;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         /* Main Container */
         .main-container {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 30px;
+            padding: 20px;
         }
 
         /* Cards */
         .card {
             background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            padding: 25px;
-            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
         }
 
         .card-header {
@@ -97,74 +103,76 @@
             flex-wrap: wrap;
             gap: 15px;
             margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         .card-header h2 {
             font-size: 18px;
             font-weight: 600;
-            color: #1a1a2e;
+            color: #2c3e50;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         /* Search Bar */
         .search-wrapper {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex: 1;
             max-width: 450px;
         }
 
         .search-wrapper input {
             flex: 1;
-            padding: 10px 16px;
-            border: 1px solid #dee2e6;
-            border-radius: 12px;
-            font-size: 14px;
-            background: #f8f9fa;
+            padding: 8px 14px;
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 13px;
+            background: #ffffff;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .search-wrapper input:focus {
             outline: none;
-            border-color: #1a1a2e;
-            background: white;
+            border-color: #2c3e50;
         }
 
         .btn-search, .btn-reset, .btn-add {
-            padding: 10px 20px;
+            padding: 8px 18px;
             border: none;
-            border-radius: 12px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: 500;
             font-size: 13px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.2s;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .btn-search {
-            background: #1a1a2e;
+            background: #2c3e50;
             color: white;
         }
 
         .btn-reset {
-            background: #f0f2f5;
-            color: #4a5568;
+            background: #ecf0f1;
+            color: #7f8c8d;
         }
 
         .btn-add {
-            background: #10b981;
+            background: #27ae60;
             color: white;
         }
 
-        .btn-add:hover { background: #059669; }
+        .btn-add:hover { background: #229954; }
 
         /* Table */
         .table-wrapper {
             overflow-x: auto;
-            border-radius: 16px;
-            border: 1px solid #e9ecef;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
         }
 
         table {
@@ -175,16 +183,18 @@
 
         th {
             background: #f8f9fa;
-            color: #1a1a2e;
-            padding: 14px 10px;
+            color: #2c3e50;
+            padding: 10px 8px;
             font-weight: 600;
-            border-bottom: 2px solid #e9ecef;
+            border-bottom: 2px solid #e0e0e0;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         td {
-            padding: 12px 10px;
-            border-bottom: 1px solid #f0f2f5;
+            padding: 8px;
+            border-bottom: 1px solid #ecf0f1;
             vertical-align: middle;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         tr:hover {
@@ -193,31 +203,33 @@
 
         /* Badges */
         .badge-approved {
-            background: #d1fae5;
-            color: #065f46;
-            padding: 4px 12px;
-            border-radius: 50px;
+            background: #d5f5e3;
+            color: #1e8449;
+            padding: 4px 10px;
+            border-radius: 4px;
             font-size: 11px;
             font-weight: 600;
             display: inline-block;
         }
 
         .badge-active {
-            background: #dbeafe;
-            color: #1e40af;
-            padding: 4px 12px;
-            border-radius: 50px;
+            background: #d5f5e3;
+            color: #1e8449;
+            padding: 4px 10px;
+            border-radius: 4px;
             font-size: 11px;
             font-weight: 600;
+            display: inline-block;
         }
 
         .badge-expired {
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 4px 12px;
-            border-radius: 50px;
+            background: #fadbd8;
+            color: #c0392b;
+            padding: 4px 10px;
+            border-radius: 4px;
             font-size: 11px;
             font-weight: 600;
+            display: inline-block;
         }
 
         /* Icons */
@@ -226,118 +238,122 @@
             border: none;
             cursor: pointer;
             font-size: 14px;
-            padding: 6px;
-            border-radius: 8px;
+            padding: 5px 8px;
+            border-radius: 4px;
             transition: all 0.2s;
         }
 
         .icon-btn:hover {
-            background: #e9ecef;
+            background: #ecf0f1;
         }
 
-        .copy-icon { color: #3b82f6; }
-        .edit-icon { color: #f59e0b; }
-        .note-icon { color: #10b981; }
-        .delete-icon { color: #ef4444; }
+        .copy-icon { color: #3498db; }
+        .edit-icon { color: #f39c12; }
+        .note-icon { color: #27ae60; }
+        .delete-icon { color: #e74c3c; }
 
         select, input[type="text"], input[type="date"], input[type="number"] {
             width: 100%;
-            padding: 8px 10px;
-            border: 1px solid #dee2e6;
-            border-radius: 10px;
-            font-size: 12px;
+            padding: 6px 8px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 11px;
             background: white;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         /* Pagination */
         .pagination {
-            margin-top: 25px;
+            margin-top: 20px;
             display: flex;
             justify-content: center;
-            gap: 8px;
+            gap: 5px;
             flex-wrap: wrap;
         }
 
         .pagination button {
-            padding: 8px 14px;
-            background: #f0f2f5;
-            border: none;
-            border-radius: 10px;
+            padding: 6px 12px;
+            background: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 12px;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+            transition: all 0.2s;
         }
 
         .pagination button.active {
-            background: #1a1a2e;
+            background: #2c3e50;
             color: white;
+            border-color: #2c3e50;
+        }
+
+        .pagination button:hover:not(.active) {
+            background: #d5dbdb;
         }
 
         /* Upload Grid */
         .upload-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
         }
 
         .upload-card {
-            background: #f8f9fa;
-            border-radius: 20px;
-            padding: 22px;
-            border: 1px solid #e9ecef;
-            transition: all 0.2s;
-        }
-
-        .upload-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 18px;
+            border: 1px solid #e0e0e0;
         }
 
         .upload-card h3 {
-            font-size: 16px;
+            font-size: 15px;
             margin-bottom: 8px;
-            color: #1a1a2e;
+            color: #2c3e50;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .upload-card p {
-            color: #6c757d;
+            color: #7f8c8d;
             font-size: 11px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .upload-card input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #dee2e6;
-            border-radius: 12px;
-            margin-bottom: 12px;
+            padding: 8px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            margin-bottom: 10px;
             background: white;
         }
 
         .btn-upload {
-            background: #1a1a2e;
+            background: #2c3e50;
             color: white;
-            padding: 12px;
+            padding: 8px;
             border: none;
-            border-radius: 12px;
+            border-radius: 4px;
             cursor: pointer;
             width: 100%;
             font-weight: 500;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .btn-template {
-            background: #e9ecef;
-            color: #1a1a2e;
-            padding: 10px;
+            background: #ecf0f1;
+            color: #2c3e50;
+            padding: 8px;
             border: none;
-            border-radius: 12px;
+            border-radius: 4px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 8px;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            font-weight: 500;
+            gap: 6px;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         /* Modal */
@@ -356,8 +372,8 @@
 
         .modal-content {
             background: white;
-            padding: 28px;
-            border-radius: 24px;
+            padding: 25px;
+            border-radius: 8px;
             width: 90%;
             max-width: 550px;
             max-height: 85%;
@@ -368,65 +384,68 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         .modal-header h3 {
-            font-size: 20px;
-            color: #1a1a2e;
+            font-size: 18px;
+            color: #2c3e50;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .close {
-            font-size: 28px;
+            font-size: 24px;
             cursor: pointer;
-            color: #6c757d;
+            color: #7f8c8d;
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
             font-weight: 600;
             font-size: 13px;
-            color: #1a1a2e;
+            color: #2c3e50;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .form-group input, .form-group select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #dee2e6;
-            border-radius: 12px;
-            font-size: 14px;
+            padding: 8px 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .btn-save {
-            background: #10b981;
+            background: #27ae60;
             color: white;
-            padding: 14px;
+            padding: 10px;
             border: none;
-            border-radius: 12px;
+            border-radius: 4px;
             cursor: pointer;
             width: 100%;
             font-weight: 600;
             margin-top: 10px;
             font-size: 14px;
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .message {
-            padding: 14px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            font-size: 13px;
-            font-weight: 500;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            font-size: 12px;
         }
 
-        .message.success { background: #d1fae5; color: #065f46; border-left: 4px solid #10b981; }
-        .message.error { background: #fee2e2; color: #991b1b; border-left: 4px solid #ef4444; }
+        .message.success { background: #d5f5e3; color: #1e8449; border-left: 3px solid #27ae60; }
+        .message.error { background: #fadbd8; color: #c0392b; border-left: 3px solid #e74c3c; }
 
         .page {
             display: none;
@@ -436,27 +455,17 @@
             display: block;
         }
 
-        .stats {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 16px;
-            flex: 1;
+        /* No horizontal scrollbar for body */
+        body {
+            overflow-x: auto;
         }
 
         @media (max-width: 768px) {
-            .main-container { padding: 15px; }
+            .main-container { padding: 10px; }
             .nav-container { flex-direction: column; }
             .card-header { flex-direction: column; }
             .search-wrapper { max-width: 100%; }
-            th, td { font-size: 10px; padding: 6px; }
-            .stats { flex-direction: column; }
+            th, td { font-size: 10px; padding: 4px; }
         }
     </style>
 </head>
@@ -465,7 +474,7 @@
     <div class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <h1><i class="fas fa-chart-line"></i> Eaton Deal Registration</h1>
+                <h1>Eaton Deal Registration</h1>
                 <p>Manage your deals efficiently</p>
             </div>
             <div class="nav-links">
@@ -481,7 +490,7 @@
             <div class="card">
                 <div class="card-header">
                     <h2><i class="fas fa-list"></i> Deal Registrations</h2>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                         <div class="search-wrapper">
                             <input type="text" id="searchInput" placeholder="Search by Reference, Deal Reg, ASIN...">
                             <button class="btn-search" onclick="searchDeals()"><i class="fas fa-search"></i> Search</button>
@@ -491,7 +500,7 @@
                     </div>
                 </div>
                 <div class="table-wrapper">
-                    <table id="dealTable">
+                    <table>
                         <thead>
                             <tr><th>SKU</th><th>IG</th><th>SS</th><th>DS</th><th>COG</th><th>ASIN</th>
                             <th>Status</th><th>Deal Reg</th><th>Active/Exp</th><th>Expiry</th>
@@ -540,16 +549,24 @@
         </div>
     </div>
 
-    <!-- Add/Edit Deal Modal -->
-    <div id="dealModal" class="modal">
+    <!-- Edit Deal Modal (Only for edit) -->
+    <div id="editModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header"><h3 id="modalTitle"><i class="fas fa-plus-circle"></i> Add New Deal</h3><span class="close" onclick="closeModal('dealModal')">&times;</span></div>
-            <div id="dealForm"></div>
-            <button class="btn-save" onclick="saveDeal()"><i class="fas fa-save"></i> Save Deal</button>
+            <div class="modal-header"><h3><i class="fas fa-edit"></i> Edit Deal</h3><span class="close" onclick="closeModal('editModal')">&times;</span></div>
+            <div id="editForm"></div>
+            <button class="btn-save" onclick="saveEditDeal()"><i class="fas fa-save"></i> Save Changes</button>
         </div>
     </div>
 
-    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    <!-- Add Deal Modal -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><h3><i class="fas fa-plus-circle"></i> Add New Deal</h3><span class="close" onclick="closeModal('addModal')">&times;</span></div>
+            <div id="addForm"></div>
+            <button class="btn-save" onclick="saveNewDeal()"><i class="fas fa-save"></i> Add Deal</button>
+        </div>
+    </div>
+
     <script>
         // Storage key for localStorage
         const STORAGE_KEY = 'eaton_deals';
@@ -557,6 +574,7 @@
         let currentPage = 1;
         let allDeals = [];
         let filteredDeals = [];
+        let currentEditId = null;
 
         // Load data from localStorage
         function loadData() {
@@ -567,7 +585,8 @@
                 // Sample data
                 allDeals = [
                     { _id: '1', sku: 'SKU001', IG_Stock: '100', SS_Stock: '50', DS_Stock: '75', COG: '25.50', Asin: 'B01MXXXXX', Deal_Reg: 'DR001', expiry: '2025-12-31', Reference: 'REF001', New_Reference: 'NREF001', Renewal: 'Renewal Sent', Note: 'Test note', Rating: '4.5', BB: '89%', Review: '120' },
-                    { _id: '2', sku: 'SKU002', IG_Stock: '200', SS_Stock: '150', DS_Stock: '100', COG: '32.00', Asin: 'B02NXXXXX', Deal_Reg: 'DR002', expiry: '2024-01-15', Reference: 'REF002', New_Reference: '', Renewal: 'Renewal Pending', Note: '', Rating: '3.8', BB: '75%', Review: '45' }
+                    { _id: '2', sku: 'SKU002', IG_Stock: '200', SS_Stock: '150', DS_Stock: '100', COG: '32.00', Asin: 'B02NXXXXX', Deal_Reg: 'DR002', expiry: '2024-01-15', Reference: 'REF002', New_Reference: '', Renewal: 'Renewal Pending', Note: '', Rating: '3.8', BB: '75%', Review: '45' },
+                    { _id: '3', sku: 'SKU003', IG_Stock: '75', SS_Stock: '30', DS_Stock: '45', COG: '18.75', Asin: 'B03PXXXXX', Deal_Reg: 'DR003', expiry: '2025-06-30', Reference: 'REF003', New_Reference: 'NREF003', Renewal: '', Note: 'Priority deal', Rating: '4.2', BB: '92%', Review: '89' }
                 ];
                 saveData();
             }
@@ -598,114 +617,149 @@
                 
                 const row = tbody.insertRow();
                 row.innerHTML = `
-                    <td contenteditable="true" onblur="updateField('${deal._id}', 'sku', this.innerText)">${escapeHtml(deal.sku || '')}</td>
-                    <td contenteditable="true" onblur="updateField('${deal._id}', 'IG_Stock', this.innerText)">${escapeHtml(deal.IG_Stock || '0')}</td>
-                    <td contenteditable="true" onblur="updateField('${deal._id}', 'SS_Stock', this.innerText)">${escapeHtml(deal.SS_Stock || '0')}</td>
-                    <td contenteditable="true" onblur="updateField('${deal._id}', 'DS_Stock', this.innerText)">${escapeHtml(deal.DS_Stock || '0')}</td>
-                    <td contenteditable="true" onblur="updateField('${deal._id}', 'COG', this.innerText)">${escapeHtml(deal.COG || '')}</td>
-                    <td contenteditable="true" onblur="updateField('${deal._id}', 'Asin', this.innerText)">${escapeHtml(deal.Asin || '')}</td>
-                    <td><span class="badge-approved"><i class="fas fa-check-circle"></i> Approved</span></td>
-                    <td contenteditable="true" onblur="updateField('${deal._id}', 'Deal_Reg', this.innerText)">${escapeHtml(deal.Deal_Reg || '')}</td>
+                    <td>${escapeHtml(deal.sku || '')}</td>
+                    <td>${escapeHtml(deal.IG_Stock || '0')}</td>
+                    <td>${escapeHtml(deal.SS_Stock || '0')}</td>
+                    <td>${escapeHtml(deal.DS_Stock || '0')}</td>
+                    <td>${escapeHtml(deal.COG || '')}</td>
+                    <td>${escapeHtml(deal.Asin || '')}</td>
+                    <td><span class="badge-approved">Approved</span></td>
+                    <td>${escapeHtml(deal.Deal_Reg || '')}</td>
                     <td><span class="badge-${statusActive === 'Active' ? 'active' : 'expired'}">${statusActive}</span></td>
-                    <td><input type="date" value="${deal.expiry || ''}" onchange="updateField('${deal._id}', 'expiry', this.value)"></td>
+                    <td><input type="date" value="${deal.expiry || ''}" onchange="updateExpiry('${deal._id}', this.value)"></td>
                     <td>${escapeHtml(deal.Reference || '')} <button class="icon-btn copy-icon" onclick="copyToClipboard('${deal.Reference}')"><i class="fas fa-copy"></i></button></td>
                     <td>${escapeHtml(deal.New_Reference || '')} <button class="icon-btn copy-icon" onclick="copyToClipboard('${deal.New_Reference}')"><i class="fas fa-copy"></i></button></td>
                     <td>
-                        <select onchange="updateField('${deal._id}', 'Renewal', this.value)">
+                        <select onchange="updateRenewal('${deal._id}', this.value)">
                             <option value="">Select</option>
                             <option value="Renewal Sent" ${deal.Renewal === 'Renewal Sent' ? 'selected' : ''}>Renewal Sent</option>
                             <option value="Renewal Pending" ${deal.Renewal === 'Renewal Pending' ? 'selected' : ''}>Renewal Pending</option>
                         </select>
                     </td>
                     <td><button class="icon-btn note-icon" onclick="editNote('${deal._id}', '${escapeHtml(deal.Note || '')}')"><i class="fas fa-pen"></i></button> ${escapeHtml((deal.Note || '').substring(0, 15))}</td>
-                    <td contenteditable="true" onblur="updateField('${deal._id}', 'Rating', this.innerText)">${escapeHtml(deal.Rating || '')}</td>
-                    <td contenteditable="true" onblur="updateField('${deal._id}', 'BB', this.innerText)">${escapeHtml(deal.BB || '')}</td>
-                    <td contenteditable="true" onblur="updateField('${deal._id}', 'Review', this.innerText)">${escapeHtml(deal.Review || '')}</td>
-                    <td>
-                        <button class="icon-btn edit-icon" onclick="openEditDealModal('${deal._id}')"><i class="fas fa-edit"></i></button>
-                        <button class="icon-btn delete-icon" onclick="deleteDeal('${deal._id}')"><i class="fas fa-trash"></i></button>
-                    </td>
+                    <td>${escapeHtml(deal.Rating || '')}</td>
+                    <td>${escapeHtml(deal.BB || '')}</td>
+                    <td>${escapeHtml(deal.Review || '')}</td>
+                    <td><button class="icon-btn edit-icon" onclick="openEditModal('${deal._id}')"><i class="fas fa-edit"></i> Edit</button></td>
                 `;
             }
             renderPagination();
         }
 
-        function updateField(id, field, value) {
+        function updateExpiry(id, value) {
             const dealIndex = allDeals.findIndex(d => d._id === id);
             if (dealIndex !== -1) {
-                allDeals[dealIndex][field] = value;
+                allDeals[dealIndex].expiry = value;
                 saveData();
                 filteredDeals = [...allDeals];
-                showMessage('Updated successfully', 'success');
-            }
-        }
-
-        function deleteDeal(id) {
-            if (confirm('Are you sure you want to delete this deal?')) {
-                allDeals = allDeals.filter(d => d._id !== id);
-                saveData();
-                filteredDeals = [...allDeals];
-                currentPage = 1;
                 renderTable();
-                showMessage('Deal deleted', 'success');
+                showMessage('Expiry date updated', 'success');
             }
         }
 
-        async function editNote(id, currentNote) {
+        function updateRenewal(id, value) {
+            const dealIndex = allDeals.findIndex(d => d._id === id);
+            if (dealIndex !== -1) {
+                allDeals[dealIndex].Renewal = value;
+                saveData();
+                filteredDeals = [...allDeals];
+                showMessage('Renewal status updated', 'success');
+            }
+        }
+
+        function editNote(id, currentNote) {
             const newNote = prompt('Edit note:', currentNote);
-            if (newNote !== null) updateField(id, 'Note', newNote);
+            if (newNote !== null) {
+                const dealIndex = allDeals.findIndex(d => d._id === id);
+                if (dealIndex !== -1) {
+                    allDeals[dealIndex].Note = newNote;
+                    saveData();
+                    filteredDeals = [...allDeals];
+                    renderTable();
+                    showMessage('Note updated', 'success');
+                }
+            }
+        }
+
+        function openEditModal(id) {
+            const deal = allDeals.find(d => d._id === id);
+            if (!deal) return;
+            currentEditId = id;
+            document.getElementById('editForm').innerHTML = `
+                <div class="form-group"><label>SKU</label><input type="text" id="edit_sku" value="${escapeHtml(deal.sku || '')}"></div>
+                <div class="form-group"><label>IG Stock</label><input type="text" id="edit_IG_Stock" value="${escapeHtml(deal.IG_Stock || '0')}"></div>
+                <div class="form-group"><label>SS Stock</label><input type="text" id="edit_SS_Stock" value="${escapeHtml(deal.SS_Stock || '0')}"></div>
+                <div class="form-group"><label>DS Stock</label><input type="text" id="edit_DS_Stock" value="${escapeHtml(deal.DS_Stock || '0')}"></div>
+                <div class="form-group"><label>COG</label><input type="text" id="edit_COG" value="${escapeHtml(deal.COG || '')}"></div>
+                <div class="form-group"><label>ASIN</label><input type="text" id="edit_Asin" value="${escapeHtml(deal.Asin || '')}"></div>
+                <div class="form-group"><label>Deal Reg</label><input type="text" id="edit_Deal_Reg" value="${escapeHtml(deal.Deal_Reg || '')}"></div>
+                <div class="form-group"><label>Expiry</label><input type="date" id="edit_expiry" value="${deal.expiry || ''}"></div>
+                <div class="form-group"><label>Reference</label><input type="text" id="edit_Reference" value="${escapeHtml(deal.Reference || '')}"></div>
+                <div class="form-group"><label>New Reference</label><input type="text" id="edit_New_Reference" value="${escapeHtml(deal.New_Reference || '')}"></div>
+                <div class="form-group"><label>Rating</label><input type="text" id="edit_Rating" value="${escapeHtml(deal.Rating || '')}"></div>
+                <div class="form-group"><label>BB</label><input type="text" id="edit_BB" value="${escapeHtml(deal.BB || '')}"></div>
+                <div class="form-group"><label>Reviews</label><input type="text" id="edit_Review" value="${escapeHtml(deal.Review || '')}"></div>
+            `;
+            document.getElementById('editModal').style.display = 'flex';
+        }
+
+        function saveEditDeal() {
+            const updatedData = {
+                sku: document.getElementById('edit_sku').value,
+                IG_Stock: document.getElementById('edit_IG_Stock').value,
+                SS_Stock: document.getElementById('edit_SS_Stock').value,
+                DS_Stock: document.getElementById('edit_DS_Stock').value,
+                COG: document.getElementById('edit_COG').value,
+                Asin: document.getElementById('edit_Asin').value,
+                Deal_Reg: document.getElementById('edit_Deal_Reg').value,
+                expiry: document.getElementById('edit_expiry').value,
+                Reference: document.getElementById('edit_Reference').value,
+                New_Reference: document.getElementById('edit_New_Reference').value,
+                Rating: document.getElementById('edit_Rating').value,
+                BB: document.getElementById('edit_BB').value,
+                Review: document.getElementById('edit_Review').value
+            };
+            
+            const index = allDeals.findIndex(d => d._id === currentEditId);
+            if (index !== -1) {
+                allDeals[index] = { ...allDeals[index], ...updatedData };
+                saveData();
+                filteredDeals = [...allDeals];
+                renderTable();
+                showMessage('Deal updated successfully', 'success');
+            }
+            closeModal('editModal');
         }
 
         function openAddDealModal() {
-            window.editingDealId = null;
-            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus-circle"></i> Add New Deal';
-            document.getElementById('dealForm').innerHTML = `
-                <div class="form-group"><label>SKU *</label><input type="text" id="deal_sku" placeholder="Enter SKU"></div>
-                <div class="form-group"><label>IG Stock</label><input type="text" id="deal_IG_Stock" value="0"></div>
-                <div class="form-group"><label>SS Stock</label><input type="text" id="deal_SS_Stock" value="0"></div>
-                <div class="form-group"><label>DS Stock</label><input type="text" id="deal_DS_Stock" value="0"></div>
-                <div class="form-group"><label>COG</label><input type="text" id="deal_COG"></div>
-                <div class="form-group"><label>ASIN</label><input type="text" id="deal_Asin"></div>
-                <div class="form-group"><label>Deal Reg *</label><input type="text" id="deal_Deal_Reg"></div>
-                <div class="form-group"><label>Expiry</label><input type="date" id="deal_expiry"></div>
-                <div class="form-group"><label>Reference</label><input type="text" id="deal_Reference"></div>
-                <div class="form-group"><label>New Reference</label><input type="text" id="deal_New_Reference"></div>
+            document.getElementById('addForm').innerHTML = `
+                <div class="form-group"><label>SKU *</label><input type="text" id="add_sku" placeholder="Enter SKU"></div>
+                <div class="form-group"><label>IG Stock</label><input type="text" id="add_IG_Stock" value="0"></div>
+                <div class="form-group"><label>SS Stock</label><input type="text" id="add_SS_Stock" value="0"></div>
+                <div class="form-group"><label>DS Stock</label><input type="text" id="add_DS_Stock" value="0"></div>
+                <div class="form-group"><label>COG</label><input type="text" id="add_COG"></div>
+                <div class="form-group"><label>ASIN</label><input type="text" id="add_Asin"></div>
+                <div class="form-group"><label>Deal Reg *</label><input type="text" id="add_Deal_Reg"></div>
+                <div class="form-group"><label>Expiry</label><input type="date" id="add_expiry"></div>
+                <div class="form-group"><label>Reference</label><input type="text" id="add_Reference"></div>
+                <div class="form-group"><label>New Reference</label><input type="text" id="add_New_Reference"></div>
             `;
-            document.getElementById('dealModal').style.display = 'flex';
+            document.getElementById('addModal').style.display = 'flex';
         }
 
-        function openEditDealModal(id) {
-            const deal = allDeals.find(d => d._id === id);
-            if (!deal) return;
-            window.editingDealId = id;
-            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-edit"></i> Edit Deal';
-            document.getElementById('dealForm').innerHTML = `
-                <div class="form-group"><label>SKU</label><input type="text" id="deal_sku" value="${escapeHtml(deal.sku || '')}"></div>
-                <div class="form-group"><label>IG Stock</label><input type="text" id="deal_IG_Stock" value="${escapeHtml(deal.IG_Stock || '0')}"></div>
-                <div class="form-group"><label>SS Stock</label><input type="text" id="deal_SS_Stock" value="${escapeHtml(deal.SS_Stock || '0')}"></div>
-                <div class="form-group"><label>DS Stock</label><input type="text" id="deal_DS_Stock" value="${escapeHtml(deal.DS_Stock || '0')}"></div>
-                <div class="form-group"><label>COG</label><input type="text" id="deal_COG" value="${escapeHtml(deal.COG || '')}"></div>
-                <div class="form-group"><label>ASIN</label><input type="text" id="deal_Asin" value="${escapeHtml(deal.Asin || '')}"></div>
-                <div class="form-group"><label>Deal Reg</label><input type="text" id="deal_Deal_Reg" value="${escapeHtml(deal.Deal_Reg || '')}"></div>
-                <div class="form-group"><label>Expiry</label><input type="date" id="deal_expiry" value="${deal.expiry || ''}"></div>
-                <div class="form-group"><label>Reference</label><input type="text" id="deal_Reference" value="${escapeHtml(deal.Reference || '')}"></div>
-                <div class="form-group"><label>New Reference</label><input type="text" id="deal_New_Reference" value="${escapeHtml(deal.New_Reference || '')}"></div>
-            `;
-            document.getElementById('dealModal').style.display = 'flex';
-        }
-
-        function saveDeal() {
-            const dealData = {
-                sku: document.getElementById('deal_sku').value,
-                IG_Stock: document.getElementById('deal_IG_Stock').value || '0',
-                SS_Stock: document.getElementById('deal_SS_Stock').value || '0',
-                DS_Stock: document.getElementById('deal_DS_Stock').value || '0',
-                COG: document.getElementById('deal_COG').value,
-                Asin: document.getElementById('deal_Asin').value,
-                Deal_Reg: document.getElementById('deal_Deal_Reg').value,
-                expiry: document.getElementById('deal_expiry').value,
-                Reference: document.getElementById('deal_Reference').value,
-                New_Reference: document.getElementById('deal_New_Reference').value,
+        function saveNewDeal() {
+            const newDeal = {
+                _id: generateId(),
+                sku: document.getElementById('add_sku').value,
+                IG_Stock: document.getElementById('add_IG_Stock').value || '0',
+                SS_Stock: document.getElementById('add_SS_Stock').value || '0',
+                DS_Stock: document.getElementById('add_DS_Stock').value || '0',
+                COG: document.getElementById('add_COG').value,
+                Asin: document.getElementById('add_Asin').value,
+                Deal_Reg: document.getElementById('add_Deal_Reg').value,
+                expiry: document.getElementById('add_expiry').value,
+                Reference: document.getElementById('add_Reference').value,
+                New_Reference: document.getElementById('add_New_Reference').value,
                 Renewal: '',
                 Note: '',
                 Rating: '',
@@ -713,28 +767,17 @@
                 Review: ''
             };
             
-            if (!dealData.sku || !dealData.Deal_Reg) {
+            if (!newDeal.sku || !newDeal.Deal_Reg) {
                 showMessage('SKU and Deal Reg are required', 'error');
                 return;
             }
             
-            if (window.editingDealId) {
-                const index = allDeals.findIndex(d => d._id === window.editingDealId);
-                if (index !== -1) {
-                    allDeals[index] = { ...allDeals[index], ...dealData };
-                    saveData();
-                    showMessage('Deal updated', 'success');
-                }
-            } else {
-                dealData._id = generateId();
-                allDeals.push(dealData);
-                saveData();
-                showMessage('Deal added', 'success');
-            }
-            
-            closeModal('dealModal');
+            allDeals.push(newDeal);
+            saveData();
             filteredDeals = [...allDeals];
             renderTable();
+            closeModal('addModal');
+            showMessage('New deal added successfully', 'success');
         }
 
         function copyToClipboard(text) { 
