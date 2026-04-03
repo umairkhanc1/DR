@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eaton Deal Registration</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden; /* BODY NEVER SCROLLS */
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  background: #f0f1f3;
+  color: #1c1f26;
+}
+
+/* ── SHELL ── */
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── TOP HEADER ── */
+.header {
+  flex-shrink: 0;
+  background: #1c2a3a;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 54px;
+  border-bottom: 2px solid #263545;
+}
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-brand .bolt { font-size: 18px; }
+.header-brand h1 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.2px;
+}
+.header-brand span {
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-left: 4px;
+}
+
+/* ── TOP NAV TABS ── */
+.topnav {
+  flex-shrink: 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e5ea;
+  padding: 0 28px;
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  height: 44px;
+}
+.tab {
+  height: 44px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.tab:hover { color: #1c2a3a; }
+.tab.active { color: #1c2a3a; border-bottom-color: #1c2a3a; font-weight: 600; }
+.tab-icon { font-size: 14px; }
+
+/* ── TOOLBAR ROW ── */
+.toolbar-row {
+  flex-shrink: 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e5ea;
+  padding: 10px 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.toolbar-row select,
+.toolbar-row input[type=text] {
+  height: 34px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0 10px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  color: #1c1f26;
+  background: #f9fafb;
+  outline: none;
+  transition: border 0.15s;
+}
+.toolbar-row select:focus,
+.toolbar-row input[type=text]:focus { border-color: #1c2a3a; background: #fff; }
+.toolbar-row input[type=text] { width: 220px; }
+.toolbar-row .sep { width: 1px; height: 22px; background: #e2e5ea; margin: 0 4px; }
+.record-count { font-size: 12px; color: #9ca3af; margin-left: 4px; }
+
+/* ── BUTTONS ── */
+.btn {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.btn-dark { background: #1c2a3a; color: #fff; }
+.btn-dark:hover { background: #263d52; }
+.btn-outline { background: #fff; color: #374151; border: 1px solid #d1d5db; }
+.btn-outline:hover { background: #f3f4f6; border-color: #9ca3af; }
+.btn-ghost { background: transparent; color: #6b7280; border: 1px solid transparent; }
+.btn-ghost:hover { background: #f3f4f6; color: #1c1f26; }
+.btn-sm { height: 28px; padding: 0 10px; font-size: 12px; }
+
+/* ── STAT PILLS (inside toolbar) ── */
+.stat-pills { display: flex; gap: 8px; margin-left: auto; }
+.pill {
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pill-total { background: #f3f4f6; color: #374151; }
+.pill-active { background: #dbeafe; color: #1d4ed8; }
+.pill-expired { background: #fee2e2; color: #b91c1c; }
+.pill-approved { background: #dcfce7; color: #15803d; }
+
+/* ── PAGE AREA (fixed height, no overflow on outer) ── */
+.page-area {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+.page {
+  display: none;
+  height: 100%;
+  overflow: hidden;
+}
+.page.active { display: flex; flex-direction: column; }
+
+/* ── TABLE SECTION — ONLY THIS SCROLLS ── */
+.table-section {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: auto;
+  background: #fff;
+  border-top: none;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1750px;
+}
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+thead tr { background: #f8f9fb; }
+th {
+  padding: 9px 10px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e5e7eb;
+  border-right: 1px solid #f3f4f6;
+  white-space: nowrap;
+}
+th:last-child { border-right: none; }
+tbody tr { border-bottom: 1px solid #f3f4f6; transition: background 0.1s; }
+tbody tr:hover { background: #f9fafb; }
+td {
+  padding: 8px 10px;
+  vertical-align: middle;
+  white-space: nowrap;
+  border-right: 1px solid #f3f4f6;
+  color: #374151;
+}
+td:last-child { border-right: none; }
+.mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #1c1f26; }
+
+/* ── TABLE FOOTER ── */
+.table-footer {
+  flex-shrink: 0;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.page-info { font-size: 12px; color: #9ca3af; }
+.pagination { display: flex; gap: 4px; }
+.pg-btn {
+  height: 30px;
+  min-width: 30px;
+  padding: 0 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.12s;
+  font-weight: 500;
+}
+.pg-btn:hover:not(.active):not([disabled]) { background: #f3f4f6; border-color: #d1d5db; }
+.pg-btn.active { background: #1c2a3a; color: #fff; border-color: #1c2a3a; }
+.pg-btn[disabled] { opacity: 0.35; cursor: not-allowed; }
+
+/* ── BADGES ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.badge-approved { background: #dcfce7; color: #15803d; }
+.badge-approved::before { background: #16a34a; }
+.badge-active { background: #dbeafe; color: #1d4ed8; }
+.badge-active::before { background: #2563eb; }
+.badge-expired { background: #fee2e2; color: #b91c1c; }
+.badge-expired::before { background: #dc2626; }
+
+/* ── COPY BTN ── */
+.copy-btn {
+  background: none;
+  border: 1px solid #e5e7eb;
+  color: #9ca3af;
+  border-radius: 4px;
+  padding: 1px 6px;
+  cursor: pointer;
+  font-size: 10px;
+  font-family: 'Inter', sans-serif;
+  margin-left: 4px;
+  transition: all 0.12s;
+}
+.copy-btn:hover { background: #1c2a3a; color: #fff; border-color: #1c2a3a; }
+
+/* ── RENEWAL ── */
+.renewal-sel {
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  padding: 3px 7px;
+  font-size: 11px;
+  background: #f9fafb;
+  font-family: 'Inter', sans-serif;
+  color: #374151;
+  cursor: pointer;
+  max-width: 135px;
+}
+.renewal-sel:focus { outline: none; border-color: #1c2a3a; }
+
+/* ── ICON BTN ── */
+.ico-btn {
+  width: 26px; height: 26px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.12s;
+  color: #6b7280;
+}
+.ico-btn:hover { background: #1c2a3a; color: #fff; border-color: #1c2a3a; }
+
+/* ── NO DATA ── */
+.no-data-cell { text-align: center; padding: 80px 20px; color: #9ca3af; }
+.no-data-cell .nd-icon { font-size: 36px; margin-bottom: 10px; }
+.no-data-cell h4 { font-size: 14px; color: #6b7280; margin-bottom: 4px; }
+.no-data-cell p { font-size: 12px; }
+
+/* ── UPLOAD PAGE ── */
+.upload-page {
+  flex: 1;
+  overflow-y: auto;  /* upload page itself doesn't scroll outer — but inner can */
+  padding: 28px;
+  background: #f0f1f3;
+}
+.upload-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+.upload-card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  padding: 22px;
+  border-top: 3px solid #1c2a3a;
+}
+.upload-card.c-blue { border-top-color: #2563eb; }
+.upload-card.c-green { border-top-color: #16a34a; }
+.uc-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.uc-header h3 { font-size: 14px; font-weight: 700; color: #1c1f26; }
+.uc-desc { font-size: 12px; color: #9ca3af; margin-bottom: 12px; }
+.cols-box {
+  font-size: 11px;
+  background: #f8faff;
+  border: 1px solid #dbeafe;
+  border-radius: 6px;
+  padding: 8px 11px;
+  margin-bottom: 14px;
+  color: #1d4ed8;
+  line-height: 1.7;
+}
+.cols-box b { color: #1c2a3a; }
+.file-zone {
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  background: #f9fafb;
+  margin-bottom: 12px;
+  transition: all 0.15s;
+}
+.file-zone:hover { border-color: #1c2a3a; background: #f0f4f8; }
+.file-zone.has-file { border-color: #16a34a; background: #f0fdf4; }
+.file-zone input[type=file] { display: none; }
+.fz-icon { font-size: 20px; margin-bottom: 4px; }
+.fz-label { font-size: 12px; color: #9ca3af; }
+.fz-name { font-size: 12px; color: #16a34a; font-weight: 600; }
+.uc-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.up-msg { margin-top: 10px; font-size: 12px; padding: 7px 10px; border-radius: 6px; display: none; }
+.up-msg.ok { background: #dcfce7; color: #15803d; display: block; }
+.up-msg.err { background: #fee2e2; color: #b91c1c; display: block; }
+
+/* ── MODAL ── */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 35, 0.5);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+.overlay.open { display: flex; }
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 560px;
+  max-width: 96vw;
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 26px 28px 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  animation: mUp 0.2s ease;
+}
+@keyframes mUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+.modal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.modal-head h3 { font-size: 16px; font-weight: 700; color: #1c1f26; }
+.mclose { background: #f3f4f6; border: none; border-radius: 50%; width: 28px; height: 28px; font-size: 14px; cursor: pointer; color: #6b7280; display: flex; align-items: center; justify-content: center; }
+.mclose:hover { background: #fee2e2; color: #b91c1c; }
+.msec { margin-bottom: 16px; }
+.msec-title { font-size: 10px; font-weight: 700; color: #9ca3af; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #f3f4f6; }
+.mgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.field { display: flex; flex-direction: column; gap: 3px; }
+.field.full { grid-column: 1/-1; }
+.field label { font-size: 11px; font-weight: 600; color: #6b7280; }
+.field input, .field select, .field textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 7px 9px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  color: #1c1f26;
+  background: #f9fafb;
+  outline: none;
+  transition: border 0.15s;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: #1c2a3a; background: #fff; }
+.mfoot { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; padding-top: 14px; border-top: 1px solid #f3f4f6; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(10px);
+  background: #1c2a3a; color: #fff; padding: 10px 20px; border-radius: 8px;
+  font-size: 13px; font-weight: 500; z-index: 9999;
+  opacity: 0; transition: all 0.25s; pointer-events: none; white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-brand">
+      <span class="bolt">⚡</span>
+      <h1>Eaton Deal Registration</h1>
+      <span>Portal</span>
+    </div>
+  </div>
+
+  <!-- TOP NAV -->
+  <div class="topnav">
+    <button class="tab active" onclick="switchTab('deals', this)">
+      <span class="tab-icon">📋</span> Deal Registrations
+    </button>
+    <button class="tab" onclick="switchTab('upload', this)">
+      <span class="tab-icon">📤</span> Upload Files
+    </button>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar-row" id="dealsToolbar">
+    <select id="searchField">
+      <option value="reference">Reference</option>
+      <option value="newReference">New Reference</option>
+      <option value="dealReg">Deal Reg</option>
+      <option value="asin">ASIN</option>
+    </select>
+    <input type="text" id="searchInput" placeholder="Search..." onkeyup="if(event.key==='Enter')doSearch()">
+    <button class="btn btn-dark" onclick="doSearch()">Search</button>
+    <button class="btn btn-outline" onclick="clearSearch()">Clear</button>
+    <span class="record-count" id="recordCount"></span>
+    <div class="sep"></div>
+    <button class="btn btn-dark" onclick="openAddDeal()">＋ Add Deal</button>
+    <div class="stat-pills" id="statPills"></div>
+  </div>
+
+  <div class="toolbar-row" id="uploadToolbar" style="display:none;">
+    <span style="font-size:13px;color:#6b7280;font-weight:500;">Upload deal reg, stock, or Keepa data files</span>
+  </div>
+
+  <!-- PAGE AREA -->
+  <div class="page-area">
+
+    <!-- DEALS PAGE -->
+    <div id="page-deals" class="page active">
+      <div class="table-section">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>SKU</th><th>IG Stock</th><th>SS Stock</th><th>DS Stock</th>
+              <th>COG</th><th>ASIN</th><th>Status</th><th>Deal Reg</th><th>Deal Status</th>
+              <th>Disti</th><th>Expiry</th><th>Reference</th><th>New Reference</th>
+              <th>Renewal</th><th>Note</th><th>Rating</th><th>BB</th><th>Review</th><th>Edit</th>
+            </tr>
+          </thead>
+          <tbody id="tBody"></tbody>
+        </table>
+      </div>
+      <div class="table-footer">
+        <div class="page-info" id="pageInfo"></div>
+        <div class="pagination" id="pagDiv"></div>
+      </div>
+    </div>
+
+    <!-- UPLOAD PAGE -->
+    <div id="page-upload" class="page">
+      <div class="upload-page">
+        <div class="upload-grid">
+
+          <div class="upload-card">
+            <div class="uc-header"><span>📋</span><h3>Deal Reg Upload</h3></div>
+            <p class="uc-desc">Bulk add or update deal registrations from a CSV file.</p>
+            <div class="cols-box"><b>Required:</b> sku, deal reg, expiry, reference<br><b>Optional:</b> asin</div>
+            <div class="file-zone" id="drDrop" onclick="document.getElementById('drFile').click()">
+              <input type="file" id="drFile" accept=".csv" onchange="fileChosen('drFile','drDrop','drName')">
+              <div class="fz-icon">📂</div>
+              <div id="drName" class="fz-label">Click to choose CSV</div>
+            </div>
+            <div class="uc-actions">
+              <button class="btn btn-dark" onclick="uploadDR()">⬆ Upload</button>
+              <button class="btn btn-outline" onclick="dlTpl('dealreg')">⬇ Download Template</button>
+            </div>
+            <div class="up-msg" id="drMsg"></div>
+          </div>
+
+          <div class="upload-card c-blue">
+            <div class="uc-header"><span>📦</span><h3>Stock Upload</h3></div>
+            <p class="uc-desc">Upload stock levels mapped by distributor (IG / SS / DS).</p>
+            <div class="cols-box"><b>Required:</b> disti, sku, quantity<br><b>IG</b> → IG Stock &nbsp;·&nbsp; <b>SS</b> → SS Stock &nbsp;·&nbsp; <b>DS</b> → DS Stock</div>
+            <div class="file-zone" id="stDrop" onclick="document.getElementById('stFile').click()">
+              <input type="file" id="stFile" accept=".csv" onchange="fileChosen('stFile','stDrop','stName')">
+              <div class="fz-icon">📦</div>
+              <div id="stName" class="fz-label">Click to choose CSV</div>
+            </div>
+            <div class="uc-actions">
+              <button class="btn btn-dark" onclick="uploadST()">⬆ Upload</button>
+              <button class="btn btn-outline" onclick="dlTpl('stock')">⬇ Download Template</button>
+            </div>
+            <div class="up-msg" id="stMsg"></div>
+          </div>
+
+          <div class="upload-card c-green">
+            <div class="uc-header"><span>📊</span><h3>Keepa Data Upload</h3></div>
+            <p class="uc-desc">Update Rating, Buybox, and Reviews for matching ASINs.</p>
+            <div class="cols-box"><b>Required:</b> asin, ratings, buybox, reviews</div>
+            <div class="file-zone" id="kpDrop" onclick="document.getElementById('kpFile').click()">
+              <input type="file" id="kpFile" accept=".csv" onchange="fileChosen('kpFile','kpDrop','kpName')">
+              <div class="fz-icon">📊</div>
+              <div id="kpName" class="fz-label">Click to choose CSV</div>
+            </div>
+            <div class="uc-actions">
+              <button class="btn btn-dark" onclick="uploadKP()">⬆ Upload</button>
+              <button class="btn btn-outline" onclick="dlTpl('keepa')">⬇ Download Template</button>
+            </div>
+            <div class="up-msg" id="kpMsg"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end page-area -->
+</div><!-- end shell -->
+
+<!-- ADD/EDIT MODAL -->
+<div class="overlay" id="editOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="mTitle">Add New Deal</h3>
+      <button class="mclose" onclick="closeM('editOverlay')">✕</button>
+    </div>
+    <div class="msec">
+      <div class="msec-title">Product Info</div>
+      <div class="mgrid">
+        <div class="field"><label>SKU</label><input id="e_sku" type="text" placeholder="e.g. 5SX1000RUT"></div>
+        <div class="field"><label>ASIN</label><input id="e_asin" type="text" placeholder="e.g. B08XYZ1234"></div>
+        <div class="field"><label>COG</label><input id="e_cog" type="text" placeholder="Cost of goods"></div>
+        <div class="field"><label>Disti</label>
+          <select id="e_disti"><option value="">-- Select --</option><option>IG</option><option>SS</option><option>DS</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="msec">
+      <div class="msec-title">Stock</div>
+      <div class="mgrid">
+        <div class="field"><label>IG Stock</label><input id="e_ig" type="number" placeholder="0"></div>
+        <div class="field"><label>SS Stock</label><input id="e_ss" type="number" placeholder="0"></div>
+        <div class="field full"><label>DS Stock</label><input id="e_ds" type="number" placeholder="0"></div>
+      </div>
+    </div>
+    <div class="msec">
+      <div class="msec-title">Deal Registration</div>
+      <div class="mgrid">
+        <div class="field"><label>Deal Reg #</label><input id="e_dr" type="text" placeholder="Deal reg number"></div>
+        <div class="field"><label>Expiry (MM/DD/YYYY)</label><input id="e_exp" type="text" placeholder="MM/DD/YYYY"></div>
+        <div class="field"><label>Reference</label><input id="e_ref" type="text" placeholder="Reference"></div>
+        <div class="field"><label>New Reference</label><input id="e_nref" type="text" placeholder="New reference"></div>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn btn-outline" onclick="closeM('editOverlay')">Cancel</button>
+      <button class="btn btn-dark" id="mSaveBtn" onclick="saveEdit()">＋ Add Deal</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTE MODAL -->
+<div class="overlay" id="noteOverlay">
+  <div class="modal" style="width:400px;">
+    <div class="modal-head">
+      <h3>Edit Note</h3>
+      <button class="mclose" onclick="closeM('noteOverlay')">✕</button>
+    </div>
+    <div class="field">
+      <label>Note</label>
+      <textarea id="noteTA" rows="5" placeholder="Write your note..."></textarea>
+    </div>
+    <div class="mfoot">
+      <button class="btn btn-outline" onclick="closeM('noteOverlay')">Cancel</button>
+      <button class="btn btn-dark" onclick="saveNote()">Save Note</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SK='eaton_v3', PS=20;
+let deals=[], filtered=[], page=1, editIdx=-1, noteIdx=-1, adding=false;
+
+function load(){try{deals=JSON.parse(localStorage.getItem(SK))||[];}catch{deals=[];}}
+function save(){localStorage.setItem(SK,JSON.stringify(deals));}
+
+function pDate(v){
+  if(!v)return null;let d;
+  if(/^\d{4}-\d{2}-\d{2}/.test(v))d=new Date(v+'T00:00:00');
+  else if(/^\d{1,2}\/\d{1,2}\/\d{4}/.test(v)){const p=v.split('/');d=new Date(+p[2],+p[0]-1,+p[1]);}
+  else d=new Date(v);
+  return isNaN(d)?null:d;
+}
+function fDate(v){if(!v)return'';const d=pDate(v);if(!d)return v;return`${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;}
+function cStat(d){if(!d.expiry)return'Active';const e=pDate(d.expiry);if(!e)return'Active';return e<new Date()?'Expired':'Active';}
+
+function switchTab(name, btn){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('page-'+name).classList.add('active');
+  document.getElementById('dealsToolbar').style.display = name==='deals'?'flex':'none';
+  document.getElementById('uploadToolbar').style.display = name==='upload'?'flex':'none';
+}
+
+function renderStats(){
+  const t=deals.length, a=deals.filter(d=>cStat(d)==='Active').length,
+        ex=deals.filter(d=>cStat(d)==='Expired').length, ap=deals.filter(d=>d.status==='Approved').length;
+  document.getElementById('statPills').innerHTML=`
+    <div class="pill pill-total">Total: ${t}</div>
+    <div class="pill pill-active">Active: ${a}</div>
+    <div class="pill pill-expired">Expired: ${ex}</div>
+    <div class="pill pill-approved">Approved: ${ap}</div>`;
+}
+
+function render(){
+  renderStats();
+  const start=(page-1)*PS;
+  const rows=filtered.slice(start,start+PS);
+  const tb=document.getElementById('tBody');
+  if(!filtered.length){
+    tb.innerHTML=`<tr><td colspan="20"><div class="no-data-cell"><div class="nd-icon">📋</div><h4>No records found</h4><p>Upload deal registrations from the Upload tab or click <b>+ Add Deal</b>.</p></div></td></tr>`;
+    document.getElementById('pageInfo').textContent='';
+    document.getElementById('pagDiv').innerHTML='';
+    document.getElementById('recordCount').textContent='';
+    return;
+  }
+  document.getElementById('recordCount').textContent=`${filtered.length} record(s)`;
+  tb.innerHTML=rows.map((d,i)=>{
+    const gi=deals.indexOf(d), ds=cStat(d);
+    const sb=d.status==='Approved'?`<span class="badge badge-approved">Approved</span>`:
+      ds==='Expired'?`<span class="badge badge-expired">Expired</span>`:`<span class="badge badge-active">Active</span>`;
+    const dsb=ds==='Expired'?`<span class="badge badge-expired">Expired</span>`:`<span class="badge badge-active">Active</span>`;
+    const ref=d.reference?`<span class="mono">${x(d.reference)}</span><button class="copy-btn" onclick="cp('${x(d.reference)}')">Copy</button>`:'—';
+    const nref=d.newReference?`<span class="mono">${x(d.newReference)}</span><button class="copy-btn" onclick="cp('${x(d.newReference)}')">Copy</button>`:'—';
+    const ren=`<select class="renewal-sel" onchange="setRen(${gi},this.value)">
+      <option value="" ${!d.renewal?'selected':''}>— Select —</option>
+      <option value="Renewal Sent" ${d.renewal==='Renewal Sent'?'selected':''}>Renewal Sent</option>
+      <option value="Renewal Pending" ${d.renewal==='Renewal Pending'?'selected':''}>Renewal Pending</option>
+    </select>`;
+    const ns=d.note?`<span title="${x(d.note)}" style="max-width:60px;display:inline-block;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;font-size:11px;">${x(d.note.substring(0,14))}${d.note.length>14?'…':''}</span> `:'';
+    return`<tr>
+      <td style="color:#9ca3af;font-size:11px;">${start+i+1}</td>
+      <td class="mono">${x(d.sku||'—')}</td>
+      <td style="text-align:right;">${d.igStock||'—'}</td>
+      <td style="text-align:right;">${d.ssStock||'—'}</td>
+      <td style="text-align:right;">${d.dsStock||'—'}</td>
+      <td>${x(d.cog||'—')}</td>
+      <td class="mono">${x(d.asin||'—')}</td>
+      <td>${sb}</td>
+      <td class="mono">${x(d.dealReg||'—')}</td>
+      <td>${dsb}</td>
+      <td style="font-weight:600;">${x(d.disti||'—')}</td>
+      <td style="font-size:11px;">${fDate(d.expiry)||'—'}</td>
+      <td>${ref}</td>
+      <td>${nref}</td>
+      <td>${ren}</td>
+      <td>${ns}<button class="ico-btn" onclick="openNote(${gi})">✏</button></td>
+      <td style="text-align:right;">${x(d.rating||'—')}</td>
+      <td>${x(d.bb||'—')}</td>
+      <td style="text-align:right;">${x(d.review||'—')}</td>
+      <td><button class="ico-btn" onclick="openEdit(${gi})">✏</button></td>
+    </tr>`;
+  }).join('');
+  renderPag();
+}
+
+function renderPag(){
+  const total=Math.ceil(filtered.length/PS);
+  const fr=Math.min((page-1)*PS+1,filtered.length), to=Math.min(page*PS,filtered.length);
+  document.getElementById('pageInfo').textContent=`Showing ${fr}–${to} of ${filtered.length}`;
+  if(total<=1){document.getElementById('pagDiv').innerHTML='';return;}
+  let h=`<button class="pg-btn" onclick="goP(${page-1})" ${page===1?'disabled':''}>‹</button>`;
+  let s=Math.max(1,page-2), e=Math.min(total,s+4);if(e-s<4)s=Math.max(1,e-4);
+  for(let p=s;p<=e;p++)h+=`<button class="pg-btn ${p===page?'active':''}" onclick="goP(${p})">${p}</button>`;
+  h+=`<button class="pg-btn" onclick="goP(${page+1})" ${page===total?'disabled':''}>›</button>`;
+  document.getElementById('pagDiv').innerHTML=h;
+}
+function goP(p){page=p;render();}
+
+function doSearch(){
+  const q=document.getElementById('searchInput').value.trim().toLowerCase();
+  const f=document.getElementById('searchField').value;
+  filtered=q?deals.filter(d=>(d[f]||'').toLowerCase().includes(q)):[...deals];
+  page=1;render();
+}
+function clearSearch(){document.getElementById('searchInput').value='';filtered=[...deals];page=1;render();}
+
+function setRen(i,v){deals[i].renewal=v;save();}
+
+function openNote(i){noteIdx=i;document.getElementById('noteTA').value=deals[i].note||'';openM('noteOverlay');}
+function saveNote(){deals[noteIdx].note=document.getElementById('noteTA').value;save();closeM('noteOverlay');doSearch();toast('✓ Note saved');}
+
+function openAddDeal(){
+  adding=true;editIdx=-1;
+  document.getElementById('mTitle').textContent='Add New Deal';
+  document.getElementById('mSaveBtn').textContent='＋ Add Deal';
+  ['e_sku','e_asin','e_cog','e_ig','e_ss','e_ds','e_dr','e_exp','e_ref','e_nref'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('e_disti').value='';
+  openM('editOverlay');
+}
+function openEdit(i){
+  adding=false;editIdx=i;
+  document.getElementById('mTitle').textContent='Edit Deal Registration';
+  document.getElementById('mSaveBtn').textContent='💾 Save Changes';
+  const d=deals[i];
+  document.getElementById('e_sku').value=d.sku||'';
+  document.getElementById('e_asin').value=d.asin||'';
+  document.getElementById('e_cog').value=d.cog||'';
+  document.getElementById('e_disti').value=d.disti||'';
+  document.getElementById('e_ig').value=d.igStock||'';
+  document.getElementById('e_ss').value=d.ssStock||'';
+  document.getElementById('e_ds').value=d.dsStock||'';
+  document.getElementById('e_dr').value=d.dealReg||'';
+  document.getElementById('e_exp').value=fDate(d.expiry);
+  document.getElementById('e_ref').value=d.reference||'';
+  document.getElementById('e_nref').value=d.newReference||'';
+  openM('editOverlay');
+}
+function saveEdit(){
+  const v={sku:g('e_sku'),asin:g('e_asin'),cog:g('e_cog'),disti:g('e_disti'),igStock:g('e_ig'),ssStock:g('e_ss'),dsStock:g('e_ds'),dealReg:g('e_dr'),expiry:g('e_exp'),reference:g('e_ref'),newReference:g('e_nref')};
+  if(adding){deals.push({...v,status:'',renewal:'',note:'',rating:'',bb:'',review:''});toast('✓ Deal added');}
+  else{Object.assign(deals[editIdx],v);toast('✓ Updated');}
+  save();closeM('editOverlay');doSearch();
+}
+function g(id){return document.getElementById(id).value.trim();}
+
+function openM(id){document.getElementById(id).classList.add('open');}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');}));
+
+function cp(t){navigator.clipboard.writeText(t).catch(()=>{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');document.body.removeChild(a);});toast('✓ Copied');}
+function toast(m){const el=document.getElementById('toast');el.textContent=m;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2400);}
+function x(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function fileChosen(fid,did,nid){
+  const f=document.getElementById(fid).files[0];
+  const dr=document.getElementById(did), nm=document.getElementById(nid);
+  if(f){dr.classList.add('has-file');nm.className='fz-name';nm.textContent=f.name;}
+  else{dr.classList.remove('has-file');nm.className='fz-label';nm.textContent='Click to choose CSV';}
+}
+
+function pCSV(text){
+  const lines=text.trim().split(/\r?\n/);if(lines.length<2)return[];
+  const hdrs=lines[0].split(',').map(h=>h.trim().toLowerCase().replace(/[\s_\-]+/g,'').replace(/[^a-z0-9]/g,''));
+  return lines.slice(1).map(line=>{
+    const cols=sCSV(line);const obj={};
+    hdrs.forEach((h,i)=>{obj[h]=(cols[i]||'').trim().replace(/^"|"$/g,'');});
+    return obj;
+  }).filter(r=>Object.values(r).some(v=>v));
+}
+function sCSV(l){const r=[];let c='',q=false;for(let ch of l){if(ch==='"')q=!q;else if(ch===','&&!q){r.push(c);c='';}else c+=ch;}r.push(c);return r;}
+function rFile(id,cb){
+  const f=document.getElementById(id).files[0];
+  if(!f){cb(null,'No file selected');return;}
+  const r=new FileReader();r.onload=e=>cb(e.target.result,null);r.onerror=()=>cb(null,'Read failed');r.readAsText(f);
+}
+function setMsg(id,msg,ok){const el=document.getElementById(id);el.textContent=msg;el.className='up-msg '+(ok?'ok':'err');}
+
+function dlTpl(t){
+  const tpls={
+    dealreg:'sku,asin,deal reg,expiry,reference\nEX-SKU-001,B08XYZ1234,DR-2024-001,06/30/2025,REF-001',
+    stock:'disti,sku,quantity\nIG,EX-SKU-001,50\nSS,EX-SKU-002,30\nDS,EX-SKU-003,20',
+    keepa:'asin,ratings,buybox,reviews\nB08XYZ1234,4.5,Yes,120'
+  };
+  const names={dealreg:'deal_reg_template.csv',stock:'stock_template.csv',keepa:'keepa_template.csv'};
+  const blob=new Blob([tpls[t]],{type:'text/csv'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=names[t];a.click();
+  toast('✓ Template downloaded');
+}
+
+function uploadDR(){
+  rFile('drFile',(text,err)=>{
+    if(err){setMsg('drMsg',err,false);return;}
+    const rows=pCSV(text);if(!rows.length){setMsg('drMsg','No data.',false);return;}
+    if(!('sku' in rows[0])){setMsg('drMsg','Missing column: sku',false);return;}
+    let added=0,updated=0;
+    rows.forEach(row=>{
+      const sku=row['sku']||'',dealReg=row['dealreg']||row['dealregistration']||'',
+            expiry=row['expiry']?fDate(row['expiry']):'',reference=row['reference']||'',asin=row['asin']||'';
+      if(!sku&&!dealReg)return;
+      let ex=deals.find(d=>d.dealReg&&d.dealReg===dealReg);
+      if(ex){ex.sku=sku||ex.sku;ex.asin=asin||ex.asin;ex.expiry=expiry||ex.expiry;ex.reference=reference||ex.reference;updated++;}
+      else{deals.push({sku,asin,dealReg,expiry,reference,newReference:'',igStock:'',ssStock:'',dsStock:'',cog:'',disti:'',status:'',renewal:'',note:'',rating:'',bb:'',review:''});added++;}
+    });
+    save();filtered=[...deals];page=1;render();
+    setMsg('drMsg',`✅ Added: ${added}, Updated: ${updated}`,true);
+    document.getElementById('drFile').value='';fileChosen('drFile','drDrop','drName');
+  });
+}
+
+function uploadST(){
+  rFile('stFile',(text,err)=>{
+    if(err){setMsg('stMsg',err,false);return;}
+    const rows=pCSV(text);if(!rows.length){setMsg('stMsg','No data.',false);return;}
+    if(!('disti' in rows[0])||!('sku' in rows[0])||!('quantity' in rows[0])){setMsg('stMsg','Missing: disti, sku, quantity',false);return;}
+    let matched=0;
+    rows.forEach(row=>{
+      const di=(row['disti']||'').toUpperCase().trim(),sk=(row['sku']||'').trim(),qty=row['quantity']||'0';
+      if(!sk||!di)return;
+      deals.filter(d=>(d.sku||'').trim().toLowerCase()===sk.toLowerCase()).forEach(d=>{
+        if(di==='IG')d.igStock=qty;else if(di==='SS')d.ssStock=qty;else if(di==='DS')d.dsStock=qty;
+        d.disti=di;matched++;
+      });
+    });
+    save();doSearch();setMsg('stMsg',`✅ Updated ${matched} stock record(s)`,true);
+    document.getElementById('stFile').value='';fileChosen('stFile','stDrop','stName');
+  });
+}
+
+function uploadKP(){
+  rFile('kpFile',(text,err)=>{
+    if(err){setMsg('kpMsg',err,false);return;}
+    const rows=pCSV(text);if(!rows.length){setMsg('kpMsg','No data.',false);return;}
+    if(!('asin' in rows[0])){setMsg('kpMsg','Missing column: asin',false);return;}
+    let matched=0;
+    rows.forEach(row=>{
+      const asin=(row['asin']||'').trim();if(!asin)return;
+      deals.filter(d=>(d.asin||'').trim().toLowerCase()===asin.toLowerCase()).forEach(d=>{
+        if(row['ratings']!==undefined)d.rating=row['ratings'];
+        if(row['rating']!==undefined)d.rating=row['rating'];
+        if(row['buybox']!==undefined)d.bb=row['buybox'];
+        if(row['reviews']!==undefined)d.review=row['reviews'];
+        matched++;
+      });
+    });
+    save();doSearch();setMsg('kpMsg',`✅ Updated ${matched} record(s)`,true);
+    document.getElementById('kpFile').value='';fileChosen('kpFile','kpDrop','kpName');
+  });
+}
+
+load();filtered=[...deals];render();
+</script>
+</body>
+</html>
