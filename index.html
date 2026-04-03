@@ -114,38 +114,53 @@
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
-        /* Dashboard Stats */
+        /* Dashboard Stats - Small Compact Blocks */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
             margin-bottom: 20px;
         }
 
         .stat-card {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 12px 10px;
             text-align: center;
             border: 1px solid #e0e0e0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            transition: all 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
         .stat-card h3 {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .stat-card p {
-            font-size: 12px;
+            font-size: 11px;
             color: #7f8c8d;
+            font-weight: 500;
         }
 
-        .stat-card.active { border-left: 4px solid #27ae60; }
-        .stat-card.expired { border-left: 4px solid #e74c3c; }
-        .stat-card.renewal { border-left: 4px solid #f39c12; }
-        .stat-card.sku { border-left: 4px solid #3498db; }
+        .stat-card i {
+            font-size: 22px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .stat-card.total-sku i { color: #3498db; }
+        .stat-card.total-deals i { color: #9b59b6; }
+        .stat-card.active i { color: #27ae60; }
+        .stat-card.expired i { color: #e74c3c; }
+        .stat-card.renewal i { color: #f39c12; }
 
         /* Low Stock Table */
         .low-stock-table {
@@ -171,12 +186,13 @@
             font-weight: bold;
         }
 
-        /* Search Bar */
+        /* Search Bar - Single Search */
         .search-wrapper {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
             margin-bottom: 15px;
+            align-items: center;
         }
 
         .search-wrapper input {
@@ -187,7 +203,7 @@
             font-size: 12px;
             background: #ffffff;
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
-            min-width: 150px;
+            min-width: 250px;
         }
 
         .search-wrapper input:focus {
@@ -292,15 +308,6 @@
             display: inline-block;
         }
 
-        .badge-renewal-sent {
-            background: #fef9e7;
-            color: #f39c12;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 600;
-        }
-
         /* Icons */
         .icon-btn {
             background: none;
@@ -330,13 +337,14 @@
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
-        /* Pagination */
+        /* Pagination - Shows 1 2 3 ... 56 */
         .pagination {
             margin-top: 15px;
             display: flex;
             justify-content: center;
-            gap: 4px;
+            gap: 5px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .pagination button {
@@ -359,6 +367,12 @@
 
         .pagination button:hover:not(.active) {
             background: #d5dbdb;
+        }
+
+        .pagination .dots {
+            padding: 5px 8px;
+            font-size: 11px;
+            color: #7f8c8d;
         }
 
         /* Upload Grid */
@@ -555,25 +569,30 @@
     <div class="main-container">
         <!-- Dashboard Page -->
         <div id="dashboardPage" class="page active">
-            <!-- Stats Cards -->
+            <!-- Stats Cards - Small Blocks -->
             <div class="stats-grid">
-                <div class="stat-card sku">
+                <div class="stat-card total-sku">
+                    <i class="fas fa-box"></i>
                     <h3 id="totalSKU">0</h3>
                     <p>Total SKUs</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card total-deals">
+                    <i class="fas fa-file-alt"></i>
                     <h3 id="totalDeals">0</h3>
                     <p>Total Deal Regs</p>
                 </div>
                 <div class="stat-card active">
+                    <i class="fas fa-check-circle"></i>
                     <h3 id="activeDeals">0</h3>
                     <p>Active Deals</p>
                 </div>
                 <div class="stat-card expired">
+                    <i class="fas fa-times-circle"></i>
                     <h3 id="expiredDeals">0</h3>
                     <p>Expired Deals</p>
                 </div>
                 <div class="stat-card renewal">
+                    <i class="fas fa-envelope"></i>
                     <h3 id="renewalSent">0</h3>
                     <p>Renewal Sent</p>
                 </div>
@@ -603,11 +622,7 @@
                     <button class="btn-add" onclick="openAddDealModal()"><i class="fas fa-plus-circle"></i> Add New Deal</button>
                 </div>
                 <div class="search-wrapper">
-                    <input type="text" id="searchSKU" placeholder="Search by SKU...">
-                    <input type="text" id="searchASIN" placeholder="Search by ASIN...">
-                    <input type="text" id="searchDealReg" placeholder="Search by Deal Reg...">
-                    <input type="text" id="searchReference" placeholder="Search by Reference...">
-                    <input type="text" id="searchNewRef" placeholder="Search by New Reference...">
+                    <input type="text" id="searchInput" placeholder="Search by SKU, ASIN, Deal Reg, Reference, New Reference...">
                     <button class="btn-search" onclick="searchDeals()"><i class="fas fa-search"></i> Search</button>
                     <button class="btn-reset" onclick="resetSearch()"><i class="fas fa-undo"></i> Reset</button>
                 </div>
@@ -716,13 +731,9 @@
         }
 
         function updateDashboard() {
-            // Total SKUs
             document.getElementById('totalSKU').innerText = allDeals.length;
-            
-            // Total Deal Regs
             document.getElementById('totalDeals').innerText = allDeals.filter(d => d.Deal_Reg).length;
             
-            // Active vs Expired
             const today = new Date();
             let active = 0, expired = 0;
             allDeals.forEach(deal => {
@@ -736,11 +747,10 @@
             document.getElementById('activeDeals').innerText = active;
             document.getElementById('expiredDeals').innerText = expired;
             
-            // Renewal Sent
             const renewalSent = allDeals.filter(d => d.Renewal === 'Renewal Sent').length;
             document.getElementById('renewalSent').innerText = renewalSent;
             
-            // Low Stock Table (below 7)
+            // Low Stock Table
             const lowStock = allDeals.filter(d => 
                 parseInt(d.IG_Stock) < 7 || parseInt(d.SS_Stock) < 7 || parseInt(d.DS_Stock) < 7
             );
@@ -812,19 +822,43 @@
             
             if (totalPages <= 1) return;
             
-            for (let i = 1; i <= totalPages; i++) {
+            // Always show first page
+            const btn1 = document.createElement('button');
+            btn1.innerText = '1';
+            btn1.onclick = () => { currentPage = 1; renderTable(); };
+            if (currentPage === 1) btn1.classList.add('active');
+            container.appendChild(btn1);
+            
+            if (currentPage > 3) {
+                const dots = document.createElement('span');
+                dots.innerText = '...';
+                dots.className = 'dots';
+                container.appendChild(dots);
+            }
+            
+            // Show pages around current page
+            for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
                 const btn = document.createElement('button');
                 btn.innerText = i;
-                btn.onclick = (function(page) {
-                    return function() { 
-                        currentPage = page; 
-                        renderTable(); 
-                    };
-                })(i);
-                if (i === currentPage) {
-                    btn.classList.add('active');
-                }
+                btn.onclick = () => { currentPage = i; renderTable(); };
+                if (i === currentPage) btn.classList.add('active');
                 container.appendChild(btn);
+            }
+            
+            if (currentPage < totalPages - 2) {
+                const dots = document.createElement('span');
+                dots.innerText = '...';
+                dots.className = 'dots';
+                container.appendChild(dots);
+            }
+            
+            // Always show last page
+            if (totalPages > 1) {
+                const btnLast = document.createElement('button');
+                btnLast.innerText = totalPages;
+                btnLast.onclick = () => { currentPage = totalPages; renderTable(); };
+                if (currentPage === totalPages) btnLast.classList.add('active');
+                container.appendChild(btnLast);
             }
         }
 
@@ -971,31 +1005,20 @@
         }
 
         function searchDeals() {
-            const sku = document.getElementById('searchSKU').value.toLowerCase();
-            const asin = document.getElementById('searchASIN').value.toLowerCase();
-            const dealReg = document.getElementById('searchDealReg').value.toLowerCase();
-            const reference = document.getElementById('searchReference').value.toLowerCase();
-            const newRef = document.getElementById('searchNewRef').value.toLowerCase();
-            
-            filteredDeals = allDeals.filter(d => {
-                let match = true;
-                if (sku && !d.sku.toLowerCase().includes(sku)) match = false;
-                if (asin && !d.Asin.toLowerCase().includes(asin)) match = false;
-                if (dealReg && !d.Deal_Reg.toLowerCase().includes(dealReg)) match = false;
-                if (reference && !d.Reference.toLowerCase().includes(reference)) match = false;
-                if (newRef && !d.New_Reference.toLowerCase().includes(newRef)) match = false;
-                return match;
-            });
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            filteredDeals = allDeals.filter(d => 
+                (d.sku && d.sku.toLowerCase().includes(term)) ||
+                (d.Asin && d.Asin.toLowerCase().includes(term)) ||
+                (d.Deal_Reg && d.Deal_Reg.toLowerCase().includes(term)) ||
+                (d.Reference && d.Reference.toLowerCase().includes(term)) ||
+                (d.New_Reference && d.New_Reference.toLowerCase().includes(term))
+            );
             currentPage = 1; 
             renderTable();
         }
 
         function resetSearch() { 
-            document.getElementById('searchSKU').value = '';
-            document.getElementById('searchASIN').value = '';
-            document.getElementById('searchDealReg').value = '';
-            document.getElementById('searchReference').value = '';
-            document.getElementById('searchNewRef').value = '';
+            document.getElementById('searchInput').value = ''; 
             filteredDeals = [...allDeals]; 
             currentPage = 1; 
             renderTable(); 
