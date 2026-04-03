@@ -114,79 +114,40 @@
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
-        /* Dashboard Stats - Small Compact Blocks */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 12px;
+        /* Stats Bar - Top of Deal Portal */
+        .stats-bar {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
             margin-bottom: 20px;
-        }
-
-        .stat-card {
             background: #ffffff;
-            border-radius: 10px;
-            padding: 12px 10px;
-            text-align: center;
+            padding: 12px 20px;
+            border-radius: 8px;
             border: 1px solid #e0e0e0;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-            transition: all 0.2s;
         }
 
-        .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        .stat-item {
+            flex: 1;
+            text-align: center;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            min-width: 120px;
         }
 
-        .stat-card h3 {
-            font-size: 26px;
+        .stat-number {
+            font-size: 24px;
             font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 4px;
         }
 
-        .stat-card p {
+        .stat-label {
             font-size: 11px;
             color: #7f8c8d;
-            font-weight: 500;
+            margin-top: 4px;
         }
 
-        .stat-card i {
-            font-size: 22px;
-            margin-bottom: 6px;
-            display: block;
-        }
-
-        .stat-card.total-sku i { color: #3498db; }
-        .stat-card.total-deals i { color: #9b59b6; }
-        .stat-card.active i { color: #27ae60; }
-        .stat-card.expired i { color: #e74c3c; }
-        .stat-card.renewal i { color: #f39c12; }
-
-        /* Low Stock Table */
-        .low-stock-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-        }
-
-        .low-stock-table th {
-            background: #f8f9fa;
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .low-stock-table td {
-            padding: 6px 8px;
-            border-bottom: 1px solid #ecf0f1;
-        }
-
-        .warning {
-            color: #e74c3c;
-            font-weight: bold;
-        }
-
-        /* Search Bar - Single Search */
+        /* Search Bar */
         .search-wrapper {
             display: flex;
             gap: 8px;
@@ -337,7 +298,7 @@
             font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
-        /* Pagination - Shows 1 2 3 ... 56 */
+        /* Pagination */
         .pagination {
             margin-top: 15px;
             display: flex;
@@ -545,7 +506,8 @@
             .main-container { padding: 8px; }
             .nav-container { flex-direction: column; text-align: center; }
             .card-header { flex-direction: column; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-bar { flex-direction: column; }
+            .stat-item { min-width: auto; }
             th, td { font-size: 9px; padding: 3px; }
         }
     </style>
@@ -559,63 +521,39 @@
                 <p>Manage your deals efficiently</p>
             </div>
             <div class="nav-links">
-                <button class="nav-link active" onclick="changePage('dashboard')"><i class="fas fa-tachometer-alt"></i> Dashboard</button>
-                <button class="nav-link" onclick="changePage('portal')"><i class="fas fa-table"></i> Deal Portal</button>
+                <button class="nav-link active" onclick="changePage('portal')"><i class="fas fa-table"></i> Deal Portal</button>
                 <button class="nav-link" onclick="changePage('upload')"><i class="fas fa-upload"></i> Upload Files</button>
             </div>
         </div>
     </div>
 
     <div class="main-container">
-        <!-- Dashboard Page -->
-        <div id="dashboardPage" class="page active">
-            <!-- Stats Cards - Small Blocks -->
-            <div class="stats-grid">
-                <div class="stat-card total-sku">
-                    <i class="fas fa-box"></i>
-                    <h3 id="totalSKU">0</h3>
-                    <p>Total SKUs</p>
-                </div>
-                <div class="stat-card total-deals">
-                    <i class="fas fa-file-alt"></i>
-                    <h3 id="totalDeals">0</h3>
-                    <p>Total Deal Regs</p>
-                </div>
-                <div class="stat-card active">
-                    <i class="fas fa-check-circle"></i>
-                    <h3 id="activeDeals">0</h3>
-                    <p>Active Deals</p>
-                </div>
-                <div class="stat-card expired">
-                    <i class="fas fa-times-circle"></i>
-                    <h3 id="expiredDeals">0</h3>
-                    <p>Expired Deals</p>
-                </div>
-                <div class="stat-card renewal">
-                    <i class="fas fa-envelope"></i>
-                    <h3 id="renewalSent">0</h3>
-                    <p>Renewal Sent</p>
-                </div>
-            </div>
-
-            <!-- Low Stock Alert -->
-            <div class="card">
-                <div class="card-header">
-                    <h2><i class="fas fa-exclamation-triangle"></i> Low Stock Alert (Below 7 Units)</h2>
-                </div>
-                <div class="table-wrapper">
-                    <table class="low-stock-table">
-                        <thead>
-                            <tr><th>SKU</th><th>IG Stock</th><th>SS Stock</th><th>DS Stock</th><th>Status</th></tr>
-                        </thead>
-                        <tbody id="lowStockBody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
         <!-- Deal Portal Page -->
-        <div id="portalPage" class="page">
+        <div id="portalPage" class="page active">
+            <!-- Stats Bar at Top -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalSKU">0</div>
+                    <div class="stat-label">Total SKUs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalDeals">0</div>
+                    <div class="stat-label">Total Deal Regs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="activeDeals">0</div>
+                    <div class="stat-label">Active Deals</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="expiredDeals">0</div>
+                    <div class="stat-label">Expired Deals</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="renewalSent">0</div>
+                    <div class="stat-label">Renewal Sent</div>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-header">
                     <h2><i class="fas fa-list"></i> Deal Registrations</h2>
@@ -718,19 +656,19 @@
             }
             filteredDeals = [...allDeals];
             renderTable();
-            updateDashboard();
+            updateStats();
         }
 
         function saveData() {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(allDeals));
-            updateDashboard();
+            updateStats();
         }
 
         function generateId() {
             return Date.now().toString() + Math.random().toString(36).substr(2, 6);
         }
 
-        function updateDashboard() {
+        function updateStats() {
             document.getElementById('totalSKU').innerText = allDeals.length;
             document.getElementById('totalDeals').innerText = allDeals.filter(d => d.Deal_Reg).length;
             
@@ -749,27 +687,6 @@
             
             const renewalSent = allDeals.filter(d => d.Renewal === 'Renewal Sent').length;
             document.getElementById('renewalSent').innerText = renewalSent;
-            
-            // Low Stock Table
-            const lowStock = allDeals.filter(d => 
-                parseInt(d.IG_Stock) < 7 || parseInt(d.SS_Stock) < 7 || parseInt(d.DS_Stock) < 7
-            );
-            const lowStockBody = document.getElementById('lowStockBody');
-            lowStockBody.innerHTML = '';
-            if (lowStock.length === 0) {
-                lowStockBody.innerHTML = '<tr><td colspan="5" style="text-align:center">No low stock items</td></tr>';
-            } else {
-                lowStock.forEach(deal => {
-                    const row = lowStockBody.insertRow();
-                    row.innerHTML = `
-                        <td>${escapeHtml(deal.sku)}</td>
-                        <td class="${parseInt(deal.IG_Stock) < 7 ? 'warning' : ''}">${escapeHtml(deal.IG_Stock || '0')}</td>
-                        <td class="${parseInt(deal.SS_Stock) < 7 ? 'warning' : ''}">${escapeHtml(deal.SS_Stock || '0')}</td>
-                        <td class="${parseInt(deal.DS_Stock) < 7 ? 'warning' : ''}">${escapeHtml(deal.DS_Stock || '0')}</td>
-                        <td>${parseInt(deal.IG_Stock) < 7 || parseInt(deal.SS_Stock) < 7 || parseInt(deal.DS_Stock) < 7 ? '⚠️ Low Stock' : 'OK'}</td>
-                    `;
-                });
-            }
         }
 
         function renderTable() {
@@ -822,7 +739,7 @@
             
             if (totalPages <= 1) return;
             
-            // Always show first page
+            // First page
             const btn1 = document.createElement('button');
             btn1.innerText = '1';
             btn1.onclick = () => { currentPage = 1; renderTable(); };
@@ -836,7 +753,7 @@
                 container.appendChild(dots);
             }
             
-            // Show pages around current page
+            // Pages around current
             for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
                 const btn = document.createElement('button');
                 btn.innerText = i;
@@ -852,7 +769,7 @@
                 container.appendChild(dots);
             }
             
-            // Always show last page
+            // Last page
             if (totalPages > 1) {
                 const btnLast = document.createElement('button');
                 btnLast.innerText = totalPages;
@@ -1024,7 +941,6 @@
             renderTable(); 
         }
 
-        // File Uploads
         async function uploadDealReg() {
             const file = document.getElementById('dealRegFile').files[0];
             if (!file) return showMessage('Select a file first', 'error');
@@ -1145,13 +1061,8 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(page + 'Page').classList.add('active');
             document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
-            if (page === 'dashboard') document.querySelectorAll('.nav-link')[0].classList.add('active');
-            else if (page === 'portal') document.querySelectorAll('.nav-link')[1].classList.add('active');
-            else document.querySelectorAll('.nav-link')[2].classList.add('active');
-            
-            if (page === 'dashboard') {
-                updateDashboard();
-            }
+            if (page === 'portal') document.querySelectorAll('.nav-link')[0].classList.add('active');
+            else document.querySelectorAll('.nav-link')[1].classList.add('active');
         }
 
         function showMessage(msg, type) {
