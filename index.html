@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Eaton Deal Registration Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 0 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .logo p {
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            background: #f0f2f5;
+            padding: 5px;
+            border-radius: 50px;
+        }
+
+        .nav-link {
+            padding: 10px 28px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 50px;
+            transition: all 0.3s;
+            color: #4a5568;
+        }
+
+        .nav-link.active {
+            background: #ffffff;
+            color: #1a1a2e;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .nav-link:hover:not(.active) {
+            background: rgba(255,255,255,0.7);
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f0f2f5;
+            padding: 8px 16px;
+            border-radius: 50px;
+        }
+
+        .user-info i {
+            color: #4a5568;
+            font-size: 16px;
+        }
+
+        .btn-logout {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .btn-logout:hover { background: #c82333; }
+
+        .btn-login, .btn-signup {
+            padding: 8px 22px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .btn-login {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        .btn-login:hover { background: #2d2d44; }
+
+        .btn-signup {
+            background: #e9ecef;
+            color: #1a1a2e;
+        }
+
+        .btn-signup:hover { background: #dee2e6; }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        /* Cards */
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .card-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        /* Search Bar */
+        .search-wrapper {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            max-width: 450px;
+        }
+
+        .search-wrapper input {
+            flex: 1;
+            padding: 10px 16px;
+            border: 1px solid #dee2e6;
+            border-radius: 50px;
+            font-size: 14px;
+            background: #f8f9fa;
+        }
+
+        .search-wrapper input:focus {
+            outline: none;
+            border-color: #1a1a2e;
+            background: white;
+        }
+
+        .btn-search, .btn-reset, .btn-add {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-search {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        .btn-reset {
+            background: #f0f2f5;
+            color: #4a5568;
+        }
+
+        .btn-add {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-add:hover { background: #218838; }
+
+        /* Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        th {
+            background: #f8f9fa;
+            color: #1a1a2e;
+            padding: 12px 10px;
+            font-weight: 600;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #f0f2f5;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Badges */
+        .badge-approved {
+            background: #d4edda;
+            color: #155724;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .badge-active {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-expired {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Icons */
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 5px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:hover {
+            background: #e9ecef;
+        }
+
+        .copy-icon { color: #007bff; }
+        .edit-icon { color: #ffc107; }
+        .note-icon { color: #17a2b8; }
+
+        select, input[type="text"], input[type="date"], input[type="number"] {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 11px;
+            background: white;
+        }
+
+        /* Pagination */
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 6px 12px;
+            background: #f0f2f5;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .pagination button.active {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        /* Upload Grid */
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .upload-card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            transition: all 0.2s;
+        }
+
+        .upload-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .upload-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+        }
+
+        .upload-card p {
+            color: #6c757d;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .upload-card input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: white;
+        }
+
+        .btn-upload {
+            background: #1a1a2e;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+        }
+
+        .btn-template {
+            background: #e9ecef;
+            color: #1a1a2e;
+            padding: 8px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 8px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 550px;
+            max-height: 85%;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .modal-header h3 {
+            font-size: 18px;
+            color: #1a1a2e;
+        }
+
+        .close {
+            font-size: 24px;
+            cursor: pointer;
+            color: #6c757d;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 13px;
+            color: #1a1a2e;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+
+        .btn-save {
+            background: #28a745;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .message.success { background: #d4edda; color: #155724; border-left: 3px solid #28a745; }
+        .message.error { background: #f8d7da; color: #721c24; border-left: 3px solid #dc3545; }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .main-container { padding: 15px; }
+            .nav-container { flex-direction: column; }
+            .card-header { flex-direction: column; }
+            .search-wrapper { max-width: 100%; }
+            th, td { font-size: 10px; padding: 6px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1><i class="fas fa-chart-line"></i> Eaton Deal Registration</h1>
+                <p>Manage your deals efficiently</p>
+            </div>
+            <div class="nav-links">
+                <button class="nav-link active" onclick="changePage('portal')"><i class="fas fa-table"></i> Deal Portal</button>
+                <button class="nav-link" onclick="changePage('upload')"><i class="fas fa-upload"></i> Upload Files</button>
+            </div>
+            <div class="user-area" id="userArea">
+                <div class="user-info" id="userInfo" style="display:none;">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="userEmail"></span>
+                    <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+                <div id="loginButtons">
+                    <button class="btn-login" onclick="showLoginModal()"><i class="fas fa-key"></i> Login</button>
+                    <button class="btn-signup" onclick="showSignupModal()"><i class="fas fa-user-plus"></i> Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Deal Portal Page -->
+        <div id="portalPage" class="page active">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-list"></i> Deal Registrations</h2>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <div class="search-wrapper">
+                            <input type="text" id="searchInput" placeholder="Search by Reference, Deal Reg, ASIN...">
+                            <button class="btn-search" onclick="searchDeals()"><i class="fas fa-search"></i> Search</button>
+                            <button class="btn-reset" onclick="resetSearch()"><i class="fas fa-undo"></i> Reset</button>
+                        </div>
+                        <button class="btn-add" onclick="openAddDealModal()"><i class="fas fa-plus-circle"></i> Add New Deal</button>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>SKU</th><th>IG</th><th>SS</th><th>DS</th><th>COG</th><th>ASIN</th>
+                            <th>Status</th><th>Deal Reg</th><th>Active/Exp</th><th>Disti</th>
+                            <th>Expiry</th><th>Reference</th><th>New Ref</th><th>Renewal</th><th>Note</th>
+                            <th>Rating</th><th>BB</th><th>Reviews</th><th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dealTableBody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination" id="pagination"></div>
+            </div>
+        </div>
+
+        <!-- Upload Files Page -->
+        <div id="uploadPage" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-cloud-upload-alt"></i> Upload Files</h2>
+                </div>
+                <div class="upload-grid">
+                    <div class="upload-card">
+                        <h3><i class="fas fa-file-alt"></i> Deal Registration</h3>
+                        <p>Headers: sku, IG Stock, SS Stock, DS Stock, COG, asin, deal reg, expiry, reference, new reference</p>
+                        <input type="file" id="dealRegFile" accept=".csv,.xlsx">
+                        <button class="btn-upload" onclick="uploadDealReg()"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+                        <button class="btn-template" onclick="downloadTemplate('deal')"><i class="fas fa-download"></i> Download Template</button>
+                    </div>
+                    <div class="upload-card">
+                        <h3><i class="fas fa-chart-simple"></i> Keepa Data</h3>
+                        <p>Headers: Asin, Ratings, Buybox, Reviews (Overwrites existing)</p>
+                        <input type="file" id="keepaFile" accept=".csv,.xlsx">
+                        <button class="btn-upload" onclick="uploadKeepa()"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+                        <button class="btn-template" onclick="downloadTemplate('keepa')"><i class="fas fa-download"></i> Download Template</button>
+                    </div>
+                    <div class="upload-card">
+                        <h3><i class="fas fa-boxes"></i> Stock Update</h3>
+                        <p>Headers: disti, sku, quantity (disti = IG/SS/DS)</p>
+                        <input type="file" id="stockFile" accept=".csv,.xlsx">
+                        <button class="btn-upload" onclick="uploadStock()"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+                        <button class="btn-template" onclick="downloadTemplate('stock')"><i class="fas fa-download"></i> Download Template</button>
+                    </div>
+                </div>
+                <div id="uploadMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><h3><i class="fas fa-key"></i> Login</h3><span class="close" onclick="closeModal('loginModal')">&times;</span></div>
+            <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="Enter your email"></div>
+            <div class="form-group"><label>Password</label><input type="password" id="loginPassword" placeholder="Enter password"></div>
+            <button class="btn-save" onclick="login()"><i class="fas fa-paper-plane"></i> Login</button>
+            <div id="loginMessage"></div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><h3><i class="fas fa-user-plus"></i> Sign Up</h3><span class="close" onclick="closeModal('signupModal')">&times;</span></div>
+            <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="Enter your email"></div>
+            <div class="form-group"><label>Password</label><input type="password" id="signupPassword" placeholder="Create password"></div>
+            <button class="btn-save" onclick="signup()"><i class="fas fa-user-plus"></i> Sign Up</button>
+            <div id="signupMessage"></div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Deal Modal -->
+    <div id="dealModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><h3 id="modalTitle"><i class="fas fa-plus-circle"></i> Add New Deal</h3><span class="close" onclick="closeModal('dealModal')">&times;</span></div>
+            <div id="dealForm"></div>
+            <button class="btn-save" onclick="saveDeal()"><i class="fas fa-save"></i> Save Deal</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        let currentUser = null;
+        let currentPage = 1;
+        let allDeals = [];
+        let filteredDeals = [];
+
+        async function apiCall(endpoint, options = {}) {
+            const headers = { 'Content-Type': 'application/json' };
+            if (currentUser) headers['Authorization'] = `Bearer ${currentUser.token}`;
+            const response = await fetch(`${API_URL}${endpoint}`, { ...options, headers });
+            if (!response.ok) throw new Error((await response.json()).error || 'API Error');
+            return response.json();
+        }
+
+        async function loadDeals() {
+            try {
+                const data = await apiCall('/deals');
+                allDeals = data;
+                filteredDeals = [...allDeals];
+                currentPage = 1;
+                renderTable();
+            } catch (err) { showMessage('Error: ' + err.message, 'error'); }
+        }
+
+        function renderTable() {
+            const start = (currentPage - 1) * 20;
+            const pageDeals = filteredDeals.slice(start, start + 20);
+            const tbody = document.getElementById('dealTableBody');
+            tbody.innerHTML = '';
+            
+            for (let deal of pageDeals) {
+                const expiryDate = deal.expiry ? new Date(deal.expiry) : null;
+                const today = new Date();
+                const statusActive = (expiryDate && expiryDate < today) ? 'Expired' : 'Active';
+                
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'sku', this.innerText)">${escapeHtml(deal.sku || '')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'IG_Stock', this.innerText)">${escapeHtml(deal.IG_Stock || '0')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'SS_Stock', this.innerText)">${escapeHtml(deal.SS_Stock || '0')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'DS_Stock', this.innerText)">${escapeHtml(deal.DS_Stock || '0')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'COG', this.innerText)">${escapeHtml(deal.COG || '')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'Asin', this.innerText)">${escapeHtml(deal.Asin || '')}</td>
+                    <td><span class="badge-approved"><i class="fas fa-check-circle"></i> Approved</span></td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'Deal_Reg', this.innerText)">${escapeHtml(deal.Deal_Reg || '')}</td>
+                    <td><span class="badge-${statusActive === 'Active' ? 'active' : 'expired'}">${statusActive}</span></td>
+                    <td>${escapeHtml(deal.Disti || '')}</td>
+                    <td><input type="date" value="${deal.expiry || ''}" onchange="updateField('${deal._id}', 'expiry', this.value)"></td>
+                    <td>${escapeHtml(deal.Reference || '')} <button class="icon-btn copy-icon" onclick="copyToClipboard('${deal.Reference}')"><i class="fas fa-copy"></i></button></td>
+                    <td>${escapeHtml(deal.New_Reference || '')} <button class="icon-btn copy-icon" onclick="copyToClipboard('${deal.New_Reference}')"><i class="fas fa-copy"></i></button></td>
+                    <td>
+                        <select onchange="updateField('${deal._id}', 'Renewal', this.value)">
+                            <option value="">Select</option>
+                            <option value="Renewal Sent" ${deal.Renewal === 'Renewal Sent' ? 'selected' : ''}>Renewal Sent</option>
+                            <option value="Renewal Pending" ${deal.Renewal === 'Renewal Pending' ? 'selected' : ''}>Renewal Pending</option>
+                        </select>
+                    </td>
+                    <td><button class="icon-btn note-icon" onclick="editNote('${deal._id}', '${escapeHtml(deal.Note || '')}')"><i class="fas fa-pen"></i></button> ${escapeHtml((deal.Note || '').substring(0, 15))}</td>
+                    <td>${escapeHtml(deal.Rating || '')}</td>
+                    <td>${escapeHtml(deal.BB || '')}</td>
+                    <td>${escapeHtml(deal.Review || '')}</td>
+                    <td><button class="icon-btn edit-icon" onclick="openEditDealModal('${deal._id}')"><i class="fas fa-edit"></i></button></td>
+                `;
+            }
+            renderPagination();
+        }
+
+        async function updateField(id, field, value) {
+            if (!currentUser) { showMessage('Please login to edit', 'error'); loadDeals(); return; }
+            try {
+                await apiCall(`/deals/${id}`, { method: 'PUT', body: JSON.stringify({ [field]: value }) });
+                showMessage('Updated', 'success');
+            } catch (err) { showMessage('Update failed', 'error'); loadDeals(); }
+        }
+
+        async function editNote(id, currentNote) {
+            const newNote = prompt('Edit note:', currentNote);
+            if (newNote !== null) await updateField(id, 'Note', newNote);
+        }
+
+        function openAddDealModal() {
+            window.editingDealId = null;
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus-circle"></i> Add New Deal';
+            document.getElementById('dealForm').innerHTML = `
+                <div class="form-group"><label>SKU *</label><input type="text" id="deal_sku" placeholder="Enter SKU"></div>
+                <div class="form-group"><label>IG Stock</label><input type="text" id="deal_IG_Stock" value="0"></div>
+                <div class="form-group"><label>SS Stock</label><input type="text" id="deal_SS_Stock" value="0"></div>
+                <div class="form-group"><label>DS Stock</label><input type="text" id="deal_DS_Stock" value="0"></div>
+                <div class="form-group"><label>COG</label><input type="text" id="deal_COG"></div>
+                <div class="form-group"><label>ASIN</label><input type="text" id="deal_Asin"></div>
+                <div class="form-group"><label>Deal Reg *</label><input type="text" id="deal_Deal_Reg"></div>
+                <div class="form-group"><label>Disti</label><input type="text" id="deal_Disti"></div>
+                <div class="form-group"><label>Expiry</label><input type="date" id="deal_expiry"></div>
+                <div class="form-group"><label>Reference</label><input type="text" id="deal_Reference"></div>
+                <div class="form-group"><label>New Reference</label><input type="text" id="deal_New_Reference"></div>
+            `;
+            document.getElementById('dealModal').style.display = 'flex';
+        }
+
+        function openEditDealModal(id) {
+            const deal = allDeals.find(d => d._id === id);
+            if (!deal) return;
+            window.editingDealId = id;
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-edit"></i> Edit Deal';
+            document.getElementById('dealForm').innerHTML = `
+                <div class="form-group"><label>SKU</label><input type="text" id="deal_sku" value="${escapeHtml(deal.sku || '')}"></div>
+                <div class="form-group"><label>IG Stock</label><input type="text" id="deal_IG_Stock" value="${escapeHtml(deal.IG_Stock || '0')}"></div>
+                <div class="form-group"><label>SS Stock</label><input type="text" id="deal_SS_Stock" value="${escapeHtml(deal.SS_Stock || '0')}"></div>
+                <div class="form-group"><label>DS Stock</label><input type="text" id="deal_DS_Stock" value="${escapeHtml(deal.DS_Stock || '0')}"></div>
+                <div class="form-group"><label>COG</label><input type="text" id="deal_COG" value="${escapeHtml(deal.COG || '')}"></div>
+                <div class="form-group"><label>ASIN</label><input type="text" id="deal_Asin" value="${escapeHtml(deal.Asin || '')}"></div>
+                <div class="form-group"><label>Deal Reg</label><input type="text" id="deal_Deal_Reg" value="${escapeHtml(deal.Deal_Reg || '')}"></div>
+                <div class="form-group"><label>Disti</label><input type="text" id="deal_Disti" value="${escapeHtml(deal.Disti || '')}"></div>
+                <div class="form-group"><label>Expiry</label><input type="date" id="deal_expiry" value="${deal.expiry || ''}"></div>
+                <div class="form-group"><label>Reference</label><input type="text" id="deal_Reference" value="${escapeHtml(deal.Reference || '')}"></div>
+                <div class="form-group"><label>New Reference</label><input type="text" id="deal_New_Reference" value="${escapeHtml(deal.New_Reference || '')}"></div>
+            `;
+            document.getElementById('dealModal').style.display = 'flex';
+        }
+
+        async function saveDeal() {
+            const dealData = {
+                sku: document.getElementById('deal_sku').value,
+                IG_Stock: document.getElementById('deal_IG_Stock').value,
+                SS_Stock: document.getElementById('deal_SS_Stock').value,
+                DS_Stock: document.getElementById('deal_DS_Stock').value,
+                COG: document.getElementById('deal_COG').value,
+                Asin: document.getElementById('deal_Asin').value,
+                Deal_Reg: document.getElementById('deal_Deal_Reg').value,
+                Disti: document.getElementById('deal_Disti').value,
+                expiry: document.getElementById('deal_expiry').value,
+                Reference: document.getElementById('deal_Reference').value,
+                New_Reference: document.getElementById('deal_New_Reference').value
+            };
+            if (!dealData.sku || !dealData.Deal_Reg) {
+                showMessage('SKU and Deal Reg are required', 'error');
+                return;
+            }
+            try {
+                if (window.editingDealId) {
+                    await apiCall(`/deals/${window.editingDealId}`, { method: 'PUT', body: JSON.stringify(dealData) });
+                    showMessage('Deal updated', 'success');
+                } else {
+                    await apiCall('/deals', { method: 'POST', body: JSON.stringify(dealData) });
+                    showMessage('Deal added', 'success');
+                }
+                closeModal('dealModal');
+                loadDeals();
+            } catch (err) { showMessage('Error: ' + err.message, 'error'); }
+        }
+
+        function copyToClipboard(text) { 
+            if(text) { navigator.clipboard.writeText(text); showMessage('Copied!', 'success'); }
+        }
+
+        function searchDeals() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            filteredDeals = allDeals.filter(d => 
+                (d.Reference && d.Reference.toLowerCase().includes(term)) ||
+                (d.New_Reference && d.New_Reference.toLowerCase().includes(term)) ||
+                (d.Deal_Reg && d.Deal_Reg.toLowerCase().includes(term)) ||
+                (d.Asin && d.Asin.toLowerCase().includes(term))
+            );
+            currentPage = 1; renderTable();
+        }
+
+        function resetSearch() { document.getElementById('searchInput').value = ''; filteredDeals = [...allDeals]; currentPage = 1; renderTable(); }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredDeals.length / 20);
+            const container = document.getElementById('pagination');
+            container.innerHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.innerText = i;
+                btn.onclick = () => { currentPage = i; renderTable(); };
+                if (i === currentPage) btn.classList.add('active');
+                container.appendChild(btn);
+            }
+        }
+
+        async function uploadDealReg() {
+            const file = document.getElementById('dealRegFile').files[0];
+            if (!file) return showMessage('Select file', 'error');
+            const data = await readFile(file);
+            await apiCall('/upload/deal-reg', { method: 'POST', body: JSON.stringify({ data }) });
+            showMessage('Deal registration uploaded', 'success'); loadDeals();
+        }
+
+        async function uploadKeepa() {
+            const file = document.getElementById('keepaFile').files[0];
+            if (!file) return;
+            const data = await readFile(file);
+            await apiCall('/upload/keepa', { method: 'POST', body: JSON.stringify({ data }) });
+            showMessage('Keepa data uploaded', 'success'); loadDeals();
+        }
+
+        async function uploadStock() {
+            const file = document.getElementById('stockFile').files[0];
+            if (!file) return;
+            const data = await readFile(file);
+            await apiCall('/upload/stock', { method: 'POST', body: JSON.stringify({ data }) });
+            showMessage('Stock updated', 'success'); loadDeals();
+        }
+
+        function readFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                    resolve(XLSX.utils.sheet_to_json(sheet));
+                };
+                reader.onerror = reject;
+                reader.readAsArrayBuffer(file);
+            });
+        }
+
+        function downloadTemplate(type) {
+            let headers = [], filename = '';
+            if (type === 'deal') {
+                headers = ['sku', 'IG Stock', 'SS Stock', 'DS Stock', 'COG', 'asin', 'deal reg', 'expiry', 'reference', 'new reference'];
+                filename = 'deal_reg_template.xlsx';
+            } else if (type === 'keepa') {
+                headers = ['Asin', 'Ratings', 'Buybox', 'Reviews'];
+                filename = 'keepa_template.xlsx';
+            } else {
+                headers = ['disti', 'sku', 'quantity'];
+                filename = 'stock_template.xlsx';
+            }
+            const ws = XLSX.utils.aoa_to_sheet([headers]);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Template');
+            XLSX.writeFile(wb, filename);
+        }
+
+        // Simple Auth (No email - just local storage for demo)
+        async function signup() {
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            if (!email || !password) { showMessage('Email and password required', 'error'); return; }
+            try {
+                const res = await apiCall('/auth/signup', { method: 'POST', body: JSON.stringify({ email, password }) });
+                currentUser = res.user;
+                localStorage.setItem('user', JSON.stringify(currentUser));
+                updateUI(); closeModal('signupModal'); loadDeals();
+                showMessage('Account created! You are now logged in.', 'success');
+            } catch (err) { showMessage('Error: ' + err.message, 'error'); }
+        }
+
+        async function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            try {
+                const res = await apiCall('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
+                currentUser = res.user;
+                localStorage.setItem('user', JSON.stringify(currentUser));
+                updateUI(); closeModal('loginModal'); loadDeals();
+                showMessage('Welcome back!', 'success');
+            } catch (err) { showMessage('Invalid credentials', 'error'); }
+        }
+
+        function logout() { currentUser = null; localStorage.removeItem('user'); updateUI(); loadDeals(); showMessage('Logged out', 'success'); }
+        
+        function updateUI() {
+            if (currentUser) {
+                document.getElementById('userInfo').style.display = 'flex';
+                document.getElementById('loginButtons').style.display = 'none';
+                document.getElementById('userEmail').innerText = currentUser.email;
+            } else {
+                document.getElementById('userInfo').style.display = 'none';
+                document.getElementById('loginButtons').style.display = 'flex';
+            }
+        }
+
+        function changePage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(page + 'Page').classList.add('active');
+            document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
+            if (page === 'portal') document.querySelectorAll('.nav-link')[0].classList.add('active');
+            else document.querySelectorAll('.nav-link')[1].classList.add('active');
+        }
+
+        function showMessage(msg, type) {
+            const div = document.createElement('div');
+            div.className = `message ${type}`;
+            div.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${msg}`;
+            document.querySelector('.main-container').prepend(div);
+            setTimeout(() => div.remove(), 3000);
+        }
+
+        function showLoginModal() { document.getElementById('loginModal').style.display = 'flex'; }
+        function showSignupModal() { document.getElementById('signupModal').style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){return m==='&'?'&amp;':m==='<'?'&lt;':'&gt;';}); }
+
+        const savedUser = localStorage.getItem('user');
+        if (savedUser) currentUser = JSON.parse(savedUser);
+        updateUI();
+        loadDeals();
+    </script>
+</body>
+</html>
