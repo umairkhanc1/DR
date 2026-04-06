@@ -19,6 +19,61 @@
             min-height: 100vh;
         }
 
+        /* Login Container */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #e8e8e8;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .login-box button:hover { background: #1a252f; }
+
+        .toggle-btn {
+            background: transparent !important;
+            color: #2c3e50 !important;
+            border: 1px solid #2c3e50 !important;
+        }
+
+        .toggle-btn:hover { background: #2c3e50 !important; color: white !important; }
+
         /* Navbar */
         .navbar {
             background: #ffffff;
@@ -70,13 +125,33 @@
             border-radius: 6px;
             transition: all 0.2s;
             color: #7f8c8d;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .nav-link.active {
             background: #ffffff;
             color: #2c3e50;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-email {
+            font-size: 12px;
+            color: #2c3e50;
+        }
+
+        .logout-btn {
+            padding: 6px 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
         }
 
         /* Main Container */
@@ -111,7 +186,6 @@
             font-size: 16px;
             font-weight: 600;
             color: #2c3e50;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         .header-buttons {
@@ -119,7 +193,7 @@
             gap: 10px;
         }
 
-        /* Stats Bar - Top of Deal Portal */
+        /* Stats Bar */
         .stats-bar {
             display: flex;
             gap: 15px;
@@ -168,16 +242,10 @@
             border-radius: 4px;
             font-size: 12px;
             background: #ffffff;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
             min-width: 250px;
         }
 
-        .search-wrapper input:focus {
-            outline: none;
-            border-color: #2c3e50;
-        }
-
-        .btn-search, .btn-reset, .btn-add, .btn-download {
+        .btn-search, .btn-reset, .btn-add, .btn-download, .btn-delete-all {
             padding: 8px 16px;
             border: none;
             border-radius: 4px;
@@ -187,33 +255,16 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            transition: all 0.2s;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
-        .btn-search {
-            background: #2c3e50;
-            color: white;
-        }
-
-        .btn-reset {
-            background: #ecf0f1;
-            color: #7f8c8d;
-        }
-
-        .btn-add {
-            background: #27ae60;
-            color: white;
-        }
-
+        .btn-search { background: #2c3e50; color: white; }
+        .btn-reset { background: #ecf0f1; color: #7f8c8d; }
+        .btn-add { background: #27ae60; color: white; }
         .btn-add:hover { background: #229954; }
-
-        .btn-download {
-            background: #3498db;
-            color: white;
-        }
-
+        .btn-download { background: #3498db; color: white; }
         .btn-download:hover { background: #2980b9; }
+        .btn-delete-all { background: #e74c3c; color: white; }
+        .btn-delete-all:hover { background: #c0392b; }
 
         /* Table */
         .table-wrapper {
@@ -235,7 +286,6 @@
             padding: 8px 6px;
             font-weight: 600;
             border-bottom: 2px solid #e0e0e0;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
             white-space: nowrap;
         }
 
@@ -243,59 +293,18 @@
             padding: 6px;
             border-bottom: 1px solid #ecf0f1;
             vertical-align: middle;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
-        tr:hover {
-            background: #f8f9fa;
-        }
+        tr:hover { background: #f8f9fa; }
 
         /* Badges */
-        .badge-approved {
-            background: #d5f5e3;
-            color: #1e8449;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        .badge-active {
-            background: #d5f5e3;
-            color: #1e8449;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        .badge-expired {
-            background: #fadbd8;
-            color: #c0392b;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 600;
-            display: inline-block;
-        }
+        .badge-approved { background: #d5f5e3; color: #1e8449; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; display: inline-block; }
+        .badge-active { background: #d5f5e3; color: #1e8449; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; display: inline-block; }
+        .badge-expired { background: #fadbd8; color: #c0392b; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; display: inline-block; }
 
         /* Icons */
-        .icon-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 12px;
-            padding: 4px 6px;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-
-        .icon-btn:hover {
-            background: #ecf0f1;
-        }
-
+        .icon-btn { background: none; border: none; cursor: pointer; font-size: 12px; padding: 4px 6px; border-radius: 4px; }
+        .icon-btn:hover { background: #ecf0f1; }
         .copy-icon { color: #3498db; }
         .edit-icon { color: #f39c12; }
         .note-icon { color: #27ae60; }
@@ -307,7 +316,6 @@
             border-radius: 4px;
             font-size: 10px;
             background: white;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
         }
 
         /* Pagination */
@@ -327,8 +335,6 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 11px;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
-            transition: all 0.2s;
             min-width: 32px;
         }
 
@@ -338,15 +344,7 @@
             border-color: #2c3e50;
         }
 
-        .pagination button:hover:not(.active) {
-            background: #d5dbdb;
-        }
-
-        .pagination .dots {
-            padding: 5px 8px;
-            font-size: 11px;
-            color: #7f8c8d;
-        }
+        .pagination .dots { padding: 5px 8px; font-size: 11px; color: #7f8c8d; }
 
         /* Upload Grid */
         .upload-grid {
@@ -362,28 +360,9 @@
             border: 1px solid #e0e0e0;
         }
 
-        .upload-card h3 {
-            font-size: 14px;
-            margin-bottom: 6px;
-            color: #2c3e50;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
-        }
-
-        .upload-card p {
-            color: #7f8c8d;
-            font-size: 10px;
-            margin-bottom: 10px;
-        }
-
-        .upload-card input {
-            width: 100%;
-            padding: 6px;
-            border: 1px solid #bdc3c7;
-            border-radius: 4px;
-            margin-bottom: 8px;
-            background: white;
-            font-size: 11px;
-        }
+        .upload-card h3 { font-size: 14px; margin-bottom: 6px; color: #2c3e50; }
+        .upload-card p { color: #7f8c8d; font-size: 10px; margin-bottom: 10px; }
+        .upload-card input { width: 100%; padding: 6px; border: 1px solid #bdc3c7; border-radius: 4px; margin-bottom: 8px; background: white; font-size: 11px; }
 
         .btn-upload {
             background: #2c3e50;
@@ -394,7 +373,6 @@
             cursor: pointer;
             width: 100%;
             font-weight: 500;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
             font-size: 12px;
         }
 
@@ -411,7 +389,6 @@
             align-items: center;
             justify-content: center;
             gap: 5px;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
             font-size: 12px;
         }
 
@@ -448,238 +425,256 @@
             border-bottom: 1px solid #e0e0e0;
         }
 
-        .modal-header h3 {
-            font-size: 16px;
-            color: #2c3e50;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
-        }
+        .modal-header h3 { font-size: 16px; color: #2c3e50; }
+        .close { font-size: 22px; cursor: pointer; color: #7f8c8d; }
 
-        .close {
-            font-size: 22px;
-            cursor: pointer;
-            color: #7f8c8d;
-        }
+        .form-group { margin-bottom: 10px; }
+        .form-group label { display: block; margin-bottom: 4px; font-weight: 600; font-size: 12px; color: #2c3e50; }
+        .form-group input, .form-group select { width: 100%; padding: 6px 8px; border: 1px solid #bdc3c7; border-radius: 4px; font-size: 12px; }
 
-        .form-group {
-            margin-bottom: 10px;
-        }
+        .modal-buttons { display: flex; gap: 10px; margin-top: 10px; }
+        .btn-save { background: #27ae60; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; flex: 1; font-weight: 600; font-size: 13px; }
+        .btn-delete-modal { background: #e74c3c; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; flex: 1; font-weight: 600; font-size: 13px; }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 4px;
-            font-weight: 600;
-            font-size: 12px;
-            color: #2c3e50;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 6px 8px;
-            border: 1px solid #bdc3c7;
-            border-radius: 4px;
-            font-size: 12px;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .btn-save {
-            background: #27ae60;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            flex: 1;
-            font-weight: 600;
-            font-size: 13px;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
-        }
-
-        .btn-delete-modal {
-            background: #e74c3c;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            flex: 1;
-            font-weight: 600;
-            font-size: 13px;
-            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
-        }
-
-        .btn-delete-modal:hover { background: #c0392b; }
-
-        .message {
-            padding: 8px;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            font-size: 11px;
-        }
-
+        .message { padding: 8px; border-radius: 4px; margin-bottom: 10px; font-size: 11px; }
         .message.success { background: #d5f5e3; color: #1e8449; border-left: 3px solid #27ae60; }
         .message.error { background: #fadbd8; color: #c0392b; border-left: 3px solid #e74c3c; }
 
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
+        .page { display: none; }
+        .page.active { display: block; }
+        .app-wrapper { display: none; }
 
         @media (max-width: 768px) {
             .main-container { padding: 8px; }
             .nav-container { flex-direction: column; text-align: center; }
-            .card-header { flex-direction: column; }
             .stats-bar { flex-direction: column; }
             .stat-item { min-width: auto; }
-            .header-buttons { width: 100%; justify-content: center; }
+            .header-buttons { width: 100%; justify-content: center; flex-wrap: wrap; }
             th, td { font-size: 9px; padding: 3px; }
+            .login-box { width: 95%; padding: 25px; }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <div class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <h1>Eaton Deal Registration</h1>
-                <p>Manage your deals efficiently</p>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <h2><i class="fas fa-chart-line"></i> Eaton Portal</h2>
+            <div id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email">
+                <input type="password" id="loginPassword" placeholder="Password">
+                <button onclick="doLogin()"><i class="fas fa-key"></i> Login</button>
+                <button class="toggle-btn" onclick="showSignupPanel()"><i class="fas fa-user-plus"></i> Create Account</button>
             </div>
-            <div class="nav-links">
-                <button class="nav-link active" onclick="changePage('portal')"><i class="fas fa-table"></i> Deal Portal</button>
-                <button class="nav-link" onclick="changePage('upload')"><i class="fas fa-upload"></i> Upload Files</button>
+            <div id="signupPanel" style="display:none;">
+                <input type="text" id="signupName" placeholder="Full Name">
+                <input type="email" id="signupEmail" placeholder="Email">
+                <input type="password" id="signupPassword" placeholder="Password">
+                <button onclick="doSignup()"><i class="fas fa-user-plus"></i> Sign Up</button>
+                <button class="toggle-btn" onclick="showLoginPanel()"><i class="fas fa-arrow-left"></i> Back to Login</button>
+            </div>
+            <div id="loginMessage"></div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="appWrapper" class="app-wrapper">
+        <div class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>Eaton Deal Registration</h1>
+                    <p>Manage your deals efficiently</p>
+                </div>
+                <div class="nav-links">
+                    <button class="nav-link active" onclick="changePage('portal')"><i class="fas fa-table"></i> Deal Portal</button>
+                    <button class="nav-link" onclick="changePage('upload')"><i class="fas fa-upload"></i> Upload Files</button>
+                </div>
+                <div class="user-info">
+                    <span class="user-email" id="userEmail"></span>
+                    <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <!-- Deal Portal Page -->
+            <div id="portalPage" class="page active">
+                <div class="stats-bar">
+                    <div class="stat-item"><div class="stat-number" id="totalSKU">0</div><div class="stat-label">Total SKUs</div></div>
+                    <div class="stat-item"><div class="stat-number" id="totalDeals">0</div><div class="stat-label">Total Deal Regs</div></div>
+                    <div class="stat-item"><div class="stat-number" id="activeDeals">0</div><div class="stat-label">Active Deals</div></div>
+                    <div class="stat-item"><div class="stat-number" id="expiredDeals">0</div><div class="stat-label">Expired Deals</div></div>
+                    <div class="stat-item"><div class="stat-number" id="renewalSent">0</div><div class="stat-label">Renewal Sent</div></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-list"></i> Deal Registrations</h2>
+                        <div class="header-buttons">
+                            <button class="btn-download" onclick="downloadAllDeals()"><i class="fas fa-download"></i> Download Excel</button>
+                            <button class="btn-delete-all" onclick="deleteAllDeals()"><i class="fas fa-trash-alt"></i> Delete All</button>
+                            <button class="btn-add" onclick="openAddDealModal()"><i class="fas fa-plus-circle"></i> Add New Deal</button>
+                        </div>
+                    </div>
+                    <div class="search-wrapper">
+                        <input type="text" id="searchInput" placeholder="Search by SKU, ASIN, Deal Reg, Reference, New Reference...">
+                        <button class="btn-search" onclick="searchDeals()"><i class="fas fa-search"></i> Search</button>
+                        <button class="btn-reset" onclick="resetSearch()"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="dealTable">
+                            <thead><tr><th>SKU</th><th>IG</th><th>SS</th><th>DS</th><th>COG</th><th>ASIN</th><th>Status</th><th>Deal Reg</th><th>Active/Exp</th><th>Expiry</th><th>Reference</th><th>New Ref</th><th>Renewal</th><th>Note</th><th>Rating</th><th>BB</th><th>Reviews</th><th>Actions</th></tr></thead>
+                            <tbody id="dealTableBody"></tbody>
+                        </table>
+                    </div>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+
+            <!-- Upload Files Page -->
+            <div id="uploadPage" class="page">
+                <div class="card">
+                    <div class="card-header"><h2><i class="fas fa-cloud-upload-alt"></i> Upload Files</h2></div>
+                    <div class="upload-grid">
+                        <div class="upload-card">
+                            <h3><i class="fas fa-file-alt"></i> Deal Registration</h3>
+                            <p>Headers: sku, IG Stock, SS Stock, DS Stock, COG, asin, deal reg, expiry, reference, new reference</p>
+                            <input type="file" id="dealRegFile" accept=".csv,.xlsx">
+                            <button class="btn-upload" onclick="uploadDealReg()"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+                            <button class="btn-template" onclick="downloadTemplate('deal')"><i class="fas fa-download"></i> Download Template</button>
+                        </div>
+                        <div class="upload-card">
+                            <h3><i class="fas fa-chart-simple"></i> Keepa Data</h3>
+                            <p>Headers: Asin, Ratings, Buybox, Reviews (Overwrites existing)</p>
+                            <input type="file" id="keepaFile" accept=".csv,.xlsx">
+                            <button class="btn-upload" onclick="uploadKeepa()"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+                            <button class="btn-template" onclick="downloadTemplate('keepa')"><i class="fas fa-download"></i> Download Template</button>
+                        </div>
+                        <div class="upload-card">
+                            <h3><i class="fas fa-boxes"></i> Stock Update</h3>
+                            <p>Headers: disti, sku, quantity (disti = IG/SS/DS)</p>
+                            <input type="file" id="stockFile" accept=".csv,.xlsx">
+                            <button class="btn-upload" onclick="uploadStock()"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+                            <button class="btn-template" onclick="downloadTemplate('stock')"><i class="fas fa-download"></i> Download Template</button>
+                        </div>
+                        <div class="upload-card">
+                            <h3><i class="fas fa-calendar-alt"></i> Expiry Update</h3>
+                            <p>Headers: sku, expiry (Updates expiry date for SKUs)</p>
+                            <input type="file" id="expiryFile" accept=".csv,.xlsx">
+                            <button class="btn-upload" onclick="uploadExpiry()"><i class="fas fa-cloud-upload-alt"></i> Upload Expiry</button>
+                            <button class="btn-template" onclick="downloadTemplate('expiry')"><i class="fas fa-download"></i> Download Template</button>
+                        </div>
+                    </div>
+                    <div id="uploadMessage"></div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="main-container">
-        <!-- Deal Portal Page -->
-        <div id="portalPage" class="page active">
-            <!-- Stats Bar at Top -->
-            <div class="stats-bar">
-                <div class="stat-item">
-                    <div class="stat-number" id="totalSKU">0</div>
-                    <div class="stat-label">Total SKUs</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="totalDeals">0</div>
-                    <div class="stat-label">Total Deal Regs</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="activeDeals">0</div>
-                    <div class="stat-label">Active Deals</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="expiredDeals">0</div>
-                    <div class="stat-label">Expired Deals</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="renewalSent">0</div>
-                    <div class="stat-label">Renewal Sent</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2><i class="fas fa-list"></i> Deal Registrations</h2>
-                    <div class="header-buttons">
-                        <button class="btn-download" onclick="downloadAllDeals()"><i class="fas fa-download"></i> Download Excel</button>
-                        <button class="btn-add" onclick="openAddDealModal()"><i class="fas fa-plus-circle"></i> Add New Deal</button>
-                    </div>
-                </div>
-                <div class="search-wrapper">
-                    <input type="text" id="searchInput" placeholder="Search by SKU, ASIN, Deal Reg, Reference, New Reference...">
-                    <button class="btn-search" onclick="searchDeals()"><i class="fas fa-search"></i> Search</button>
-                    <button class="btn-reset" onclick="resetSearch()"><i class="fas fa-undo"></i> Reset</button>
-                </div>
-                <div class="table-wrapper">
-                    <table id="dealTable">
-                        <thead>
-                            <tr><th>SKU</th><th>IG</th><th>SS</th><th>DS</th><th>COG</th><th>ASIN</th>
-                            <th>Status</th><th>Deal Reg</th><th>Active/Exp</th><th>Expiry</th>
-                            <th>Reference</th><th>New Ref</th><th>Renewal</th><th>Note</th>
-                            <th>Rating</th><th>BB</th><th>Reviews</th><th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dealTableBody"></tbody>
-                    </table>
-                </div>
-                <div class="pagination" id="pagination"></div>
-            </div>
-        </div>
-
-        <!-- Upload Files Page -->
-        <div id="uploadPage" class="page">
-            <div class="card">
-                <div class="card-header">
-                    <h2><i class="fas fa-cloud-upload-alt"></i> Upload Files</h2>
-                </div>
-                <div class="upload-grid">
-                    <div class="upload-card">
-                        <h3><i class="fas fa-file-alt"></i> Deal Registration</h3>
-                        <p>Headers: sku, IG Stock, SS Stock, DS Stock, COG, asin, deal reg, expiry, reference, new reference</p>
-                        <input type="file" id="dealRegFile" accept=".csv,.xlsx">
-                        <button class="btn-upload" onclick="uploadDealReg()"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
-                        <button class="btn-template" onclick="downloadTemplate('deal')"><i class="fas fa-download"></i> Download Template</button>
-                    </div>
-                    <div class="upload-card">
-                        <h3><i class="fas fa-chart-simple"></i> Keepa Data</h3>
-                        <p>Headers: Asin, Ratings, Buybox, Reviews (Overwrites existing)</p>
-                        <input type="file" id="keepaFile" accept=".csv,.xlsx">
-                        <button class="btn-upload" onclick="uploadKeepa()"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
-                        <button class="btn-template" onclick="downloadTemplate('keepa')"><i class="fas fa-download"></i> Download Template</button>
-                    </div>
-                    <div class="upload-card">
-                        <h3><i class="fas fa-boxes"></i> Stock Update</h3>
-                        <p>Headers: disti, sku, quantity (disti = IG/SS/DS)</p>
-                        <input type="file" id="stockFile" accept=".csv,.xlsx">
-                        <button class="btn-upload" onclick="uploadStock()"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
-                        <button class="btn-template" onclick="downloadTemplate('stock')"><i class="fas fa-download"></i> Download Template</button>
-                    </div>
-                </div>
-                <div id="uploadMessage"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit Deal Modal -->
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-edit"></i> Edit Deal</h3><span class="close" onclick="closeModal('editModal')">&times;</span></div>
-            <div id="editForm"></div>
-            <div class="modal-buttons">
-                <button class="btn-delete-modal" onclick="deleteDealFromModal()"><i class="fas fa-trash"></i> Delete</button>
-                <button class="btn-save" onclick="saveEditDeal()"><i class="fas fa-save"></i> Save Changes</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add Deal Modal -->
-    <div id="addModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-plus-circle"></i> Add New Deal</h3><span class="close" onclick="closeModal('addModal')">&times;</span></div>
-            <div id="addForm"></div>
-            <button class="btn-save" onclick="saveNewDeal()"><i class="fas fa-save"></i> Add Deal</button>
-        </div>
-    </div>
+    <!-- Modals -->
+    <div id="editModal" class="modal"><div class="modal-content"><div class="modal-header"><h3><i class="fas fa-edit"></i> Edit Deal</h3><span class="close" onclick="closeModal('editModal')">&times;</span></div><div id="editForm"></div><div class="modal-buttons"><button class="btn-delete-modal" onclick="deleteDealFromModal()"><i class="fas fa-trash"></i> Delete</button><button class="btn-save" onclick="saveEditDeal()"><i class="fas fa-save"></i> Save Changes</button></div></div></div>
+    <div id="addModal" class="modal"><div class="modal-content"><div class="modal-header"><h3><i class="fas fa-plus-circle"></i> Add New Deal</h3><span class="close" onclick="closeModal('addModal')">&times;</span></div><div id="addForm"></div><button class="btn-save" onclick="saveNewDeal()"><i class="fas fa-save"></i> Add Deal</button></div></div>
 
     <script>
-        const STORAGE_KEY = 'eaton_deals';
+        // Storage keys
+        const USERS_KEY = 'eaton_users';
+        const DEALS_KEY = 'eaton_deals_';
+        let currentUser = null;
         let currentPage = 1;
         let allDeals = [];
         let filteredDeals = [];
         let currentEditId = null;
 
-        function loadData() {
-            const stored = localStorage.getItem(STORAGE_KEY);
+        // ========== AUTH FUNCTIONS ==========
+        function getDealsKey() {
+            return DEALS_KEY + currentUser;
+        }
+
+        function loadUsers() {
+            const users = localStorage.getItem(USERS_KEY);
+            return users ? JSON.parse(users) : [];
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+        }
+
+        function doSignup() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (!name || !email || !password) {
+                showLoginMessage('All fields required', 'error');
+                return;
+            }
+            
+            const users = loadUsers();
+            if (users.find(u => u.email === email)) {
+                showLoginMessage('Email already exists', 'error');
+                return;
+            }
+            
+            users.push({ name, email, password });
+            saveUsers(users);
+            showLoginMessage('Account created! Please login.', 'success');
+            showLoginPanel();
+        }
+
+        function doLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const users = loadUsers();
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = email;
+                localStorage.setItem('eaton_current_user', currentUser);
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('appWrapper').style.display = 'block';
+                document.getElementById('userEmail').innerText = user.name || email;
+                loadDeals();
+            } else {
+                showLoginMessage('Invalid email or password', 'error');
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('eaton_current_user');
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('appWrapper').style.display = 'none';
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('signupName').value = '';
+            document.getElementById('signupEmail').value = '';
+            document.getElementById('signupPassword').value = '';
+        }
+
+        function showSignupPanel() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupPanel').style.display = 'block';
+            document.getElementById('loginMessage').innerHTML = '';
+        }
+
+        function showLoginPanel() {
+            document.getElementById('signupPanel').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('loginMessage').innerHTML = '';
+        }
+
+        function showLoginMessage(msg, type) {
+            const div = document.createElement('div');
+            div.className = `message ${type}`;
+            div.innerHTML = msg;
+            document.getElementById('loginMessage').innerHTML = '';
+            document.getElementById('loginMessage').appendChild(div);
+        }
+
+        // ========== DEAL FUNCTIONS ==========
+        function loadDeals() {
+            const stored = localStorage.getItem(getDealsKey());
             if (stored) {
                 allDeals = JSON.parse(stored);
             } else {
@@ -691,15 +686,15 @@
                     { _id: '5', sku: 'SKU005', IG_Stock: '300', SS_Stock: '200', DS_Stock: '150', COG: '15.50', Asin: 'B05R33333', Deal_Reg: 'DR005', expiry: '2024-12-10', Reference: 'REF005', New_Reference: 'NREF005', Renewal: 'Renewal Pending', Note: 'High volume', Rating: '4.8', BB: '95%', Review: '234' },
                     { _id: '6', sku: 'SKU006', IG_Stock: '6', SS_Stock: '4', DS_Stock: '1', COG: '22.00', Asin: 'B06S44444', Deal_Reg: 'DR006', expiry: '2025-01-20', Reference: 'REF006', New_Reference: '', Renewal: '', Note: 'Low stock', Rating: '3.5', BB: '70%', Review: '30' }
                 ];
-                saveData();
+                saveDeals();
             }
             filteredDeals = [...allDeals];
             renderTable();
             updateStats();
         }
 
-        function saveData() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(allDeals));
+        function saveDeals() {
+            localStorage.setItem(getDealsKey(), JSON.stringify(allDeals));
             updateStats();
         }
 
@@ -710,145 +705,68 @@
         function updateStats() {
             document.getElementById('totalSKU').innerText = allDeals.length;
             document.getElementById('totalDeals').innerText = allDeals.filter(d => d.Deal_Reg).length;
-            
             const today = new Date();
             let active = 0, expired = 0;
             allDeals.forEach(deal => {
                 const expiryDate = deal.expiry ? new Date(deal.expiry) : null;
-                if (expiryDate && expiryDate < today) {
-                    expired++;
-                } else {
-                    active++;
-                }
+                if (expiryDate && expiryDate < today) expired++;
+                else active++;
             });
             document.getElementById('activeDeals').innerText = active;
             document.getElementById('expiredDeals').innerText = expired;
-            
-            const renewalSent = allDeals.filter(d => d.Renewal === 'Renewal Sent').length;
-            document.getElementById('renewalSent').innerText = renewalSent;
+            document.getElementById('renewalSent').innerText = allDeals.filter(d => d.Renewal === 'Renewal Sent').length;
         }
 
         function renderTable() {
             const start = (currentPage - 1) * 20;
-            const end = start + 20;
-            const pageDeals = filteredDeals.slice(start, end);
+            const pageDeals = filteredDeals.slice(start, start + 20);
             const tbody = document.getElementById('dealTableBody');
             tbody.innerHTML = '';
-            
             for (let deal of pageDeals) {
                 const expiryDate = deal.expiry ? new Date(deal.expiry) : null;
                 const today = new Date();
                 const statusActive = (expiryDate && expiryDate < today) ? 'Expired' : 'Active';
-                
+                const showCopyRef = deal.Reference && deal.Reference.trim() !== '';
+                const showCopyNewRef = deal.New_Reference && deal.New_Reference.trim() !== '';
                 const row = tbody.insertRow();
                 row.innerHTML = `
-                    <td>${escapeHtml(deal.sku || '')}</td>
-                    <td>${escapeHtml(deal.IG_Stock || '0')}</td>
-                    <td>${escapeHtml(deal.SS_Stock || '0')}</td>
-                    <td>${escapeHtml(deal.DS_Stock || '0')}</td>
-                    <td>${escapeHtml(deal.COG || '')}</td>
-                    <td>${escapeHtml(deal.Asin || '')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'sku', this.innerText)">${escapeHtml(deal.sku || '')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'IG_Stock', this.innerText)">${escapeHtml(deal.IG_Stock || '0')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'SS_Stock', this.innerText)">${escapeHtml(deal.SS_Stock || '0')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'DS_Stock', this.innerText)">${escapeHtml(deal.DS_Stock || '0')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'COG', this.innerText)">${escapeHtml(deal.COG || '')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'Asin', this.innerText)">${escapeHtml(deal.Asin || '')}</td>
                     <td><span class="badge-approved">Approved</span></td>
-                    <td>${escapeHtml(deal.Deal_Reg || '')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'Deal_Reg', this.innerText)">${escapeHtml(deal.Deal_Reg || '')}</td>
                     <td><span class="badge-${statusActive === 'Active' ? 'active' : 'expired'}">${statusActive}</span></td>
-                    <td><input type="date" value="${deal.expiry || ''}" onchange="updateExpiry('${deal._id}', this.value)"></td>
-                    <td>${escapeHtml(deal.Reference || '')} <button class="icon-btn copy-icon" onclick="copyToClipboard('${deal.Reference}')"><i class="fas fa-copy"></i></button></td>
-                    <td>${escapeHtml(deal.New_Reference || '')} <button class="icon-btn copy-icon" onclick="copyToClipboard('${deal.New_Reference}')"><i class="fas fa-copy"></i></button></td>
-                    <td>
-                        <select onchange="updateRenewal('${deal._id}', this.value)">
-                            <option value="">Select</option>
-                            <option value="Renewal Sent" ${deal.Renewal === 'Renewal Sent' ? 'selected' : ''}>Renewal Sent</option>
-                            <option value="Renewal Pending" ${deal.Renewal === 'Renewal Pending' ? 'selected' : ''}>Renewal Pending</option>
-                        </select>
-                    </td>
+                    <td><input type="date" value="${deal.expiry || ''}" onchange="updateField('${deal._id}', 'expiry', this.value)"></td>
+                    <td>${escapeHtml(deal.Reference || '')} ${showCopyRef ? `<button class="icon-btn copy-icon" onclick="copyToClipboard('${deal.Reference}')"><i class="fas fa-copy"></i></button>` : ''}</td>
+                    <td>${escapeHtml(deal.New_Reference || '')} ${showCopyNewRef ? `<button class="icon-btn copy-icon" onclick="copyToClipboard('${deal.New_Reference}')"><i class="fas fa-copy"></i></button>` : ''}</td>
+                    <td><select onchange="updateField('${deal._id}', 'Renewal', this.value)"><option value="">Select</option><option value="Renewal Sent" ${deal.Renewal === 'Renewal Sent' ? 'selected' : ''}>Renewal Sent</option><option value="Renewal Pending" ${deal.Renewal === 'Renewal Pending' ? 'selected' : ''}>Renewal Pending</option></select></td>
                     <td><button class="icon-btn note-icon" onclick="editNote('${deal._id}', '${escapeHtml(deal.Note || '')}')"><i class="fas fa-pen"></i></button> ${escapeHtml((deal.Note || '').substring(0, 15))}</td>
-                    <td>${escapeHtml(deal.Rating || '')}</td>
-                    <td>${escapeHtml(deal.BB || '')}</td>
-                    <td>${escapeHtml(deal.Review || '')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'Rating', this.innerText)">${escapeHtml(deal.Rating || '')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'BB', this.innerText)">${escapeHtml(deal.BB || '')}</td>
+                    <td contenteditable="true" onblur="updateField('${deal._id}', 'Review', this.innerText)">${escapeHtml(deal.Review || '')}</td>
                     <td><button class="icon-btn edit-icon" onclick="openEditModal('${deal._id}')"><i class="fas fa-edit"></i> Edit</button></td>
                 `;
             }
             renderPagination();
         }
 
-        function renderPagination() {
-            const totalPages = Math.ceil(filteredDeals.length / 20);
-            const container = document.getElementById('pagination');
-            container.innerHTML = '';
-            
-            if (totalPages <= 1) return;
-            
-            const btn1 = document.createElement('button');
-            btn1.innerText = '1';
-            btn1.onclick = () => { currentPage = 1; renderTable(); };
-            if (currentPage === 1) btn1.classList.add('active');
-            container.appendChild(btn1);
-            
-            if (currentPage > 3) {
-                const dots = document.createElement('span');
-                dots.innerText = '...';
-                dots.className = 'dots';
-                container.appendChild(dots);
-            }
-            
-            for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
-                const btn = document.createElement('button');
-                btn.innerText = i;
-                btn.onclick = () => { currentPage = i; renderTable(); };
-                if (i === currentPage) btn.classList.add('active');
-                container.appendChild(btn);
-            }
-            
-            if (currentPage < totalPages - 2) {
-                const dots = document.createElement('span');
-                dots.innerText = '...';
-                dots.className = 'dots';
-                container.appendChild(dots);
-            }
-            
-            if (totalPages > 1) {
-                const btnLast = document.createElement('button');
-                btnLast.innerText = totalPages;
-                btnLast.onclick = () => { currentPage = totalPages; renderTable(); };
-                if (currentPage === totalPages) btnLast.classList.add('active');
-                container.appendChild(btnLast);
-            }
-        }
-
-        function updateExpiry(id, value) {
-            const dealIndex = allDeals.findIndex(d => d._id === id);
-            if (dealIndex !== -1) {
-                allDeals[dealIndex].expiry = value;
-                saveData();
+        async function updateField(id, field, value) {
+            const index = allDeals.findIndex(d => d._id === id);
+            if (index !== -1) {
+                allDeals[index][field] = value;
+                saveDeals();
                 filteredDeals = [...allDeals];
                 renderTable();
-                showMessage('Expiry date updated', 'success');
+                showMessage('Updated', 'success');
             }
         }
 
-        function updateRenewal(id, value) {
-            const dealIndex = allDeals.findIndex(d => d._id === id);
-            if (dealIndex !== -1) {
-                allDeals[dealIndex].Renewal = value;
-                saveData();
-                filteredDeals = [...allDeals];
-                renderTable();
-                showMessage('Renewal status updated', 'success');
-            }
-        }
-
-        function editNote(id, currentNote) {
+        async function editNote(id, currentNote) {
             const newNote = prompt('Edit note:', currentNote);
-            if (newNote !== null) {
-                const dealIndex = allDeals.findIndex(d => d._id === id);
-                if (dealIndex !== -1) {
-                    allDeals[dealIndex].Note = newNote;
-                    saveData();
-                    filteredDeals = [...allDeals];
-                    renderTable();
-                    showMessage('Note updated', 'success');
-                }
-            }
+            if (newNote !== null) await updateField(id, 'Note', newNote);
         }
 
         function openEditModal(id) {
@@ -889,34 +807,42 @@
                 BB: document.getElementById('edit_BB').value,
                 Review: document.getElementById('edit_Review').value
             };
-            
             const index = allDeals.findIndex(d => d._id === currentEditId);
             if (index !== -1) {
                 allDeals[index] = { ...allDeals[index], ...updatedData };
-                saveData();
+                saveDeals();
                 filteredDeals = [...allDeals];
                 renderTable();
-                showMessage('Deal updated successfully', 'success');
-            }
-            closeModal('editModal');
-        }
-
-        function deleteDealFromModal() {
-            if (confirm('Are you sure you want to delete this deal?')) {
-                const index = allDeals.findIndex(d => d._id === currentEditId);
-                if (index !== -1) {
-                    allDeals.splice(index, 1);
-                    saveData();
-                    filteredDeals = [...allDeals];
-                    currentPage = 1;
-                    renderTable();
-                    showMessage('Deal deleted successfully', 'success');
-                }
+                showMessage('Deal updated', 'success');
                 closeModal('editModal');
             }
         }
 
+        function deleteDealFromModal() {
+            if (confirm('Are you sure you want to delete this deal?')) {
+                allDeals = allDeals.filter(d => d._id !== currentEditId);
+                saveDeals();
+                filteredDeals = [...allDeals];
+                currentPage = 1;
+                renderTable();
+                showMessage('Deal deleted', 'success');
+                closeModal('editModal');
+            }
+        }
+
+        function deleteAllDeals() {
+            if (confirm('⚠️ WARNING: This will delete ALL deals. Are you sure?')) {
+                allDeals = [];
+                saveDeals();
+                filteredDeals = [];
+                currentPage = 1;
+                renderTable();
+                showMessage('All deals deleted', 'success');
+            }
+        }
+
         function openAddDealModal() {
+            currentEditId = null;
             document.getElementById('addForm').innerHTML = `
                 <div class="form-group"><label>SKU *</label><input type="text" id="add_sku" placeholder="Enter SKU"></div>
                 <div class="form-group"><label>IG Stock</label><input type="text" id="add_IG_Stock" value="0"></div>
@@ -951,230 +877,83 @@
                 BB: '',
                 Review: ''
             };
-            
-            if (!newDeal.sku || !newDeal.Deal_Reg) {
-                showMessage('SKU and Deal Reg are required', 'error');
-                return;
-            }
-            
+            if (!newDeal.sku || !newDeal.Deal_Reg) { showMessage('SKU and Deal Reg required', 'error'); return; }
             allDeals.push(newDeal);
-            saveData();
+            saveDeals();
             filteredDeals = [...allDeals];
             renderTable();
             closeModal('addModal');
-            showMessage('New deal added successfully', 'success');
+            showMessage('Deal added', 'success');
+        }
+
+        function copyToClipboard(text) { if(text) { navigator.clipboard.writeText(text); showMessage('Copied!', 'success'); } }
+        
+        function searchDeals() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            filteredDeals = allDeals.filter(d => (d.sku && d.sku.toLowerCase().includes(term)) || (d.Asin && d.Asin.toLowerCase().includes(term)) || (d.Deal_Reg && d.Deal_Reg.toLowerCase().includes(term)) || (d.Reference && d.Reference.toLowerCase().includes(term)) || (d.New_Reference && d.New_Reference.toLowerCase().includes(term)));
+            currentPage = 1; renderTable();
+        }
+        
+        function resetSearch() { document.getElementById('searchInput').value = ''; filteredDeals = [...allDeals]; currentPage = 1; renderTable(); }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredDeals.length / 20);
+            const container = document.getElementById('pagination');
+            container.innerHTML = '';
+            if (totalPages <= 1) return;
+            const btn1 = document.createElement('button'); btn1.innerText = '1'; btn1.onclick = () => { currentPage = 1; renderTable(); }; if (currentPage === 1) btn1.classList.add('active'); container.appendChild(btn1);
+            if (currentPage > 3) { const dots = document.createElement('span'); dots.innerText = '...'; dots.className = 'dots'; container.appendChild(dots); }
+            for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) { const btn = document.createElement('button'); btn.innerText = i; btn.onclick = () => { currentPage = i; renderTable(); }; if (i === currentPage) btn.classList.add('active'); container.appendChild(btn); }
+            if (currentPage < totalPages - 2) { const dots = document.createElement('span'); dots.innerText = '...'; dots.className = 'dots'; container.appendChild(dots); }
+            if (totalPages > 1) { const btnLast = document.createElement('button'); btnLast.innerText = totalPages; btnLast.onclick = () => { currentPage = totalPages; renderTable(); }; if (currentPage === totalPages) btnLast.classList.add('active'); container.appendChild(btnLast); }
         }
 
         function downloadAllDeals() {
-            if (allDeals.length === 0) {
-                showMessage('No data to download', 'error');
-                return;
-            }
-            
-            const exportData = allDeals.map(deal => ({
-                'SKU': deal.sku || '',
-                'IG Stock': deal.IG_Stock || '0',
-                'SS Stock': deal.SS_Stock || '0',
-                'DS Stock': deal.DS_Stock || '0',
-                'COG': deal.COG || '',
-                'ASIN': deal.Asin || '',
-                'Status': 'Approved',
-                'Deal Reg': deal.Deal_Reg || '',
-                'Active/Expired': (() => {
-                    const expiryDate = deal.expiry ? new Date(deal.expiry) : null;
-                    const today = new Date();
-                    return (expiryDate && expiryDate < today) ? 'Expired' : 'Active';
-                })(),
-                'Expiry': deal.expiry || '',
-                'Reference': deal.Reference || '',
-                'New Reference': deal.New_Reference || '',
-                'Renewal': deal.Renewal || '',
-                'Note': deal.Note || '',
-                'Rating': deal.Rating || '',
-                'BB': deal.BB || '',
-                'Reviews': deal.Review || ''
-            }));
-            
+            if (allDeals.length === 0) { showMessage('No data to download', 'error'); return; }
+            const exportData = allDeals.map(deal => ({ 'SKU': deal.sku || '', 'IG Stock': deal.IG_Stock || '0', 'SS Stock': deal.SS_Stock || '0', 'DS Stock': deal.DS_Stock || '0', 'COG': deal.COG || '', 'ASIN': deal.Asin || '', 'Status': 'Approved', 'Deal Reg': deal.Deal_Reg || '', 'Active/Expired': (() => { const expiryDate = deal.expiry ? new Date(deal.expiry) : null; return (expiryDate && expiryDate < new Date()) ? 'Expired' : 'Active'; })(), 'Expiry': deal.expiry || '', 'Reference': deal.Reference || '', 'New Reference': deal.New_Reference || '', 'Renewal': deal.Renewal || '', 'Note': deal.Note || '', 'Rating': deal.Rating || '', 'BB': deal.BB || '', 'Reviews': deal.Review || '' }));
             const ws = XLSX.utils.json_to_sheet(exportData);
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Deal Registrations');
             XLSX.writeFile(wb, `eaton_deals_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.xlsx`);
-            showMessage('Excel file downloaded successfully', 'success');
+            showMessage('Excel downloaded', 'success');
         }
 
-        function copyToClipboard(text) { 
-            if(text) { 
-                navigator.clipboard.writeText(text); 
-                showMessage('Copied: ' + text, 'success'); 
-            }
+        async function uploadDealReg() { const file = document.getElementById('dealRegFile').files[0]; if (!file) return; const data = await readFile(file); let count = 0; for (let row of data) { const existingIndex = allDeals.findIndex(d => d.sku === row.sku); const dealData = { sku: row.sku, IG_Stock: String(row['IG Stock'] || '0'), SS_Stock: String(row['SS Stock'] || '0'), DS_Stock: String(row['DS Stock'] || '0'), COG: String(row.COG || ''), Asin: String(row.asin || ''), Deal_Reg: String(row['deal reg'] || ''), expiry: row.expiry || '', Reference: String(row.reference || ''), New_Reference: String(row['new reference'] || ''), Renewal: '', Note: '', Rating: '', BB: '', Review: '' }; if (existingIndex !== -1) { allDeals[existingIndex] = { ...allDeals[existingIndex], ...dealData }; } else { dealData._id = generateId(); allDeals.push(dealData); } count++; } saveDeals(); filteredDeals = [...allDeals]; renderTable(); showMessage(`${count} deals uploaded`, 'success'); document.getElementById('dealRegFile').value = ''; }
+        
+        async function uploadKeepa() { const file = document.getElementById('keepaFile').files[0]; if (!file) return; const data = await readFile(file); let count = 0; for (let row of data) { const deal = allDeals.find(d => d.Asin === row.Asin); if (deal) { deal.Rating = String(row.Ratings || ''); deal.BB = String(row.Buybox || ''); deal.Review = String(row.Reviews || ''); count++; } } saveDeals(); filteredDeals = [...allDeals]; renderTable(); showMessage(`${count} records updated`, 'success'); document.getElementById('keepaFile').value = ''; }
+        
+        async function uploadStock() { const file = document.getElementById('stockFile').files[0]; if (!file) return; const data = await readFile(file); let count = 0; for (let row of data) { const disti = String(row.disti || '').toUpperCase(); const sku = row.sku; const quantity = String(row.quantity || '0'); const deal = allDeals.find(d => d.sku === sku); if (deal) { if (disti === 'IG') deal.IG_Stock = quantity; else if (disti === 'SS') deal.SS_Stock = quantity; else if (disti === 'DS') deal.DS_Stock = quantity; count++; } } saveDeals(); filteredDeals = [...allDeals]; renderTable(); showMessage(`${count} stock updates`, 'success'); document.getElementById('stockFile').value = ''; }
+        
+        async function uploadExpiry() { const file = document.getElementById('expiryFile').files[0]; if (!file) return; const data = await readFile(file); let count = 0; for (let row of data) { const sku = row.sku; const expiry = row.expiry; const deal = allDeals.find(d => d.sku === sku); if (deal) { deal.expiry = expiry; count++; } } saveDeals(); filteredDeals = [...allDeals]; renderTable(); showMessage(`${count} expiry dates updated`, 'success'); document.getElementById('expiryFile').value = ''; }
+        
+        function readFile(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = function(e) { const data = new Uint8Array(e.target.result); const workbook = XLSX.read(data, { type: 'array' }); const sheet = workbook.Sheets[workbook.SheetNames[0]]; resolve(XLSX.utils.sheet_to_json(sheet)); }; reader.onerror = reject; reader.readAsArrayBuffer(file); }); }
+        
+        function downloadTemplate(type) { 
+            let headers = [], filename = ''; 
+            if (type === 'deal') { headers = ['sku', 'IG Stock', 'SS Stock', 'DS Stock', 'COG', 'asin', 'deal reg', 'expiry', 'reference', 'new reference']; filename = 'deal_reg_template.xlsx'; } 
+            else if (type === 'keepa') { headers = ['Asin', 'Ratings', 'Buybox', 'Reviews']; filename = 'keepa_template.xlsx'; } 
+            else if (type === 'stock') { headers = ['disti', 'sku', 'quantity']; filename = 'stock_template.xlsx'; }
+            else { headers = ['sku', 'expiry']; filename = 'expiry_template.xlsx'; }
+            const ws = XLSX.utils.aoa_to_sheet([headers]); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Template'); XLSX.writeFile(wb, filename); 
         }
+        
+        function changePage(page) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(page + 'Page').classList.add('active'); document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active')); if (page === 'portal') document.querySelectorAll('.nav-link')[0].classList.add('active'); else document.querySelectorAll('.nav-link')[1].classList.add('active'); }
+        
+        function showMessage(msg, type) { const div = document.createElement('div'); div.className = `message ${type}`; div.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${msg}`; document.querySelector('.main-container').prepend(div); setTimeout(() => div.remove(), 3000); }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function escapeHtml(str) { if(!str) return ''; return String(str).replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;'); }
 
-        function searchDeals() {
-            const term = document.getElementById('searchInput').value.toLowerCase();
-            filteredDeals = allDeals.filter(d => 
-                (d.sku && d.sku.toLowerCase().includes(term)) ||
-                (d.Asin && d.Asin.toLowerCase().includes(term)) ||
-                (d.Deal_Reg && d.Deal_Reg.toLowerCase().includes(term)) ||
-                (d.Reference && d.Reference.toLowerCase().includes(term)) ||
-                (d.New_Reference && d.New_Reference.toLowerCase().includes(term))
-            );
-            currentPage = 1; 
-            renderTable();
+        // Check for existing session
+        const savedUser = localStorage.getItem('eaton_current_user');
+        if (savedUser) {
+            currentUser = savedUser;
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('appWrapper').style.display = 'block';
+            const users = loadUsers();
+            const user = users.find(u => u.email === currentUser);
+            document.getElementById('userEmail').innerText = user ? user.name : currentUser;
+            loadDeals();
         }
-
-        function resetSearch() { 
-            document.getElementById('searchInput').value = ''; 
-            filteredDeals = [...allDeals]; 
-            currentPage = 1; 
-            renderTable(); 
-        }
-
-        async function uploadDealReg() {
-            const file = document.getElementById('dealRegFile').files[0];
-            if (!file) return showMessage('Select a file first', 'error');
-            const data = await readFile(file);
-            let count = 0;
-            for (let row of data) {
-                const existingIndex = allDeals.findIndex(d => d.sku === row.sku);
-                const dealData = {
-                    sku: row.sku,
-                    IG_Stock: String(row['IG Stock'] || '0'),
-                    SS_Stock: String(row['SS Stock'] || '0'),
-                    DS_Stock: String(row['DS Stock'] || '0'),
-                    COG: String(row.COG || ''),
-                    Asin: String(row.asin || ''),
-                    Deal_Reg: String(row['deal reg'] || ''),
-                    expiry: row.expiry || '',
-                    Reference: String(row.reference || ''),
-                    New_Reference: String(row['new reference'] || ''),
-                    Renewal: '',
-                    Note: '',
-                    Rating: '',
-                    BB: '',
-                    Review: ''
-                };
-                if (existingIndex !== -1) {
-                    allDeals[existingIndex] = { ...allDeals[existingIndex], ...dealData };
-                } else {
-                    dealData._id = generateId();
-                    allDeals.push(dealData);
-                }
-                count++;
-            }
-            saveData();
-            filteredDeals = [...allDeals];
-            renderTable();
-            showMessage(`${count} deals uploaded successfully`, 'success');
-            document.getElementById('dealRegFile').value = '';
-        }
-
-        async function uploadKeepa() {
-            const file = document.getElementById('keepaFile').files[0];
-            if (!file) return showMessage('Select a file first', 'error');
-            const data = await readFile(file);
-            let count = 0;
-            for (let row of data) {
-                const deal = allDeals.find(d => d.Asin === row.Asin);
-                if (deal) {
-                    deal.Rating = String(row.Ratings || '');
-                    deal.BB = String(row.Buybox || '');
-                    deal.Review = String(row.Reviews || '');
-                    count++;
-                }
-            }
-            saveData();
-            filteredDeals = [...allDeals];
-            renderTable();
-            showMessage(`${count} records updated from Keepa data`, 'success');
-            document.getElementById('keepaFile').value = '';
-        }
-
-        async function uploadStock() {
-            const file = document.getElementById('stockFile').files[0];
-            if (!file) return showMessage('Select a file first', 'error');
-            const data = await readFile(file);
-            let count = 0;
-            for (let row of data) {
-                const disti = String(row.disti || '').toUpperCase();
-                const sku = row.sku;
-                const quantity = String(row.quantity || '0');
-                const deal = allDeals.find(d => d.sku === sku);
-                if (deal) {
-                    if (disti === 'IG') deal.IG_Stock = quantity;
-                    else if (disti === 'SS') deal.SS_Stock = quantity;
-                    else if (disti === 'DS') deal.DS_Stock = quantity;
-                    count++;
-                }
-            }
-            saveData();
-            filteredDeals = [...allDeals];
-            renderTable();
-            showMessage(`${count} stock updates processed`, 'success');
-            document.getElementById('stockFile').value = '';
-        }
-
-        function readFile(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-                    resolve(XLSX.utils.sheet_to_json(sheet));
-                };
-                reader.onerror = reject;
-                reader.readAsArrayBuffer(file);
-            });
-        }
-
-        function downloadTemplate(type) {
-            let headers = [], filename = '';
-            if (type === 'deal') {
-                headers = ['sku', 'IG Stock', 'SS Stock', 'DS Stock', 'COG', 'asin', 'deal reg', 'expiry', 'reference', 'new reference'];
-                filename = 'deal_reg_template.xlsx';
-            } else if (type === 'keepa') {
-                headers = ['Asin', 'Ratings', 'Buybox', 'Reviews'];
-                filename = 'keepa_template.xlsx';
-            } else {
-                headers = ['disti', 'sku', 'quantity'];
-                filename = 'stock_template.xlsx';
-            }
-            const ws = XLSX.utils.aoa_to_sheet([headers]);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, 'Template');
-            XLSX.writeFile(wb, filename);
-        }
-
-        function changePage(page) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(page + 'Page').classList.add('active');
-            document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
-            if (page === 'portal') document.querySelectorAll('.nav-link')[0].classList.add('active');
-            else document.querySelectorAll('.nav-link')[1].classList.add('active');
-        }
-
-        function showMessage(msg, type) {
-            const div = document.createElement('div');
-            div.className = `message ${type}`;
-            div.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${msg}`;
-            const container = document.querySelector('.main-container');
-            container.prepend(div);
-            setTimeout(() => div.remove(), 3000);
-        }
-
-        function closeModal(id) { 
-            document.getElementById(id).style.display = 'none'; 
-        }
-
-        function escapeHtml(str) { 
-            if(!str) return ''; 
-            return String(str).replace(/[&<>]/g, function(m){
-                return m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;';
-            }); 
-        }
-
-        // Initialize
-        loadData();
     </script>
 </body>
 </html>
